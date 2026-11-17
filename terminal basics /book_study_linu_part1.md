@@ -65,36 +65,7 @@ The primary goal is to understand **what each command does, why it is used, how 
 - [Learning Progress](#-learning-progress)
 - [Upcoming Chapters](#-upcoming-chapters)
 
----
 
-# 📖 About This Repository
-
-This repository is my personal Linux learning documentation.
-
-The notes are organized chapter by chapter and focus on:
-
-- Understanding Linux concepts from the beginning.
-- Learning how the operating system works internally.
-- Understanding the Linux filesystem and directory structure.
-- Working with files and directories through the terminal.
-- Understanding users, groups, and file permissions.
-- Searching for files, directories, and text.
-- Practising commands through real terminal examples.
-
-### Learning Philosophy
-
-I do not want to memorize commands without understanding them.
-
-For every important command, I try to understand:
-
-1. What does the command do?
-2. Why is it necessary?
-3. What is its syntax?
-4. What do its options mean?
-5. What happens when I execute it?
-6. Where can I use it in practical situations?
-
----
 
 # 💻 Learning Environment
 
