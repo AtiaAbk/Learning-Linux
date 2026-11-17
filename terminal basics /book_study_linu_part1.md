@@ -1971,8 +1971,8 @@ A quick reference for all the important commands covered in Chapters 1–6.
 | `pwd` | Show current directory | `pwd` |
 | `ls` | List directory contents | `ls` |
 | `ls -l` | Detailed listing | `ls -l` |
-| `ls -a` | Show hidden entries | `ls -a` |
-| `ls -la` | Detailed listing including hidden entries | `ls -la` |
+| `ls -a`  | Show hidden entries | `ls -a` |
+| `ls -la`, `ls - r` , `ls - ltr`| Detailed listing including hidden entries |  `ls -la`, `ls - r` , `ls - ltr` |
 | `cd` | Change directory | `cd /tmp` |
 | `mkdir` | Create directory | `mkdir folder` |
 | `mkdir -p` | Create missing parent directories | `mkdir -p a/b/c` |
@@ -2041,35 +2041,6 @@ A quick reference for all the important commands covered in Chapters 1–6.
 | 07 | Installing Software with Package Managers | ⏳ Upcoming |
 
 ---
-
-# 🚀 Upcoming Chapters
-
-The next topics in this learning journey will include:
-
-- Package management and software installation.
-- APT and repository management.
-- Reading and writing files.
-- Text editors, including Vim.
-- Input/output redirection.
-- Shell scripting and automation.
-- Linux administration and practical system operations.
-
-The notes will be expanded as each chapter is completed.
-
----
-
-## 🎯 Final Goal
-
-Build a strong foundation in Linux so that I can confidently work with:
-
-- Linux command-line tools.
-- Filesystem navigation and management.
-- Users, groups, and permissions.
-- Software installation and package management.
-- Shell scripting and automation.
-- Linux servers and system administration.
-
-**Learning Linux is not just about knowing commands. It is about understanding how the operating system works and knowing how to use its tools effectively.**
 
 ---
 
