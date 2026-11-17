@@ -1633,7 +1633,12 @@ You may see:
 ```text
 Permission denied
 ```
+try 
 
+```bash
+sudo find / -name "something"
+```
+sudo for root access (password protected)
 This happens when your normal user does not have permission to access certain locations.
 
 It is a permission issue, not necessarily a command error.
