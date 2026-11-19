@@ -8,7 +8,7 @@
 ![Shell](https://img.shields.io/badge/Shell-Bash-4EAA25?style=for-the-badge&logo=gnubash&logoColor=white)
 ![Status](https://img.shields.io/badge/Status-In%20Progress-blue?style=for-the-badge)
 ![Notes](https://img.shields.io/badge/Notes-Chapters%201--6-orange?style=for-the-badge)
-![Progress](https://img.shields.io/badge/Progress-6%2F7%20Chapters-success?style=for-the-badge)
+[![Part 2](https://img.shields.io/badge/Next-Part%202%20(Ch%207--9)-8a2be2?style=for-the-badge&logo=gitbook&logoColor=white)](./book_study_linu_part2.md)
 
 **What each command does · why it is used · how it works · when to use it**
 
@@ -25,17 +25,18 @@
 
 | # | Chapter | What You'll Find |
 |:-:|---|---|
-| 🛠️ | [Learning Environment](#-learning-environment) | My setup: macOS + Ubuntu VM |
-| 1 | [Introduction to Linux](#-chapter-1-introduction-to-linux) | Kernel, distributions, OS comparison, deadlock |
-| 2 | [Bringing Linux Home](#-chapter-2-bringing-linux-home) | WSL2, virtual machines, dual boot, first commands |
-| 3 | [Understanding the Language of Linux](#-chapter-3-understanding-the-language-of-linux) | Terminal vs shell, prompt, command structure, help |
-| 4 | [Exploring the Linux Filesystem](#-chapter-4-exploring-the-linux-filesystem) | Directory layout, paths, navigation, permissions |
-| 5 | [Managing Files and Directories](#-chapter-5-managing-files-and-directories) | `mkdir` `touch` `cp` `mv` `rm`, wildcards |
-| 6 | [Finding Lost Files](#-chapter-6-finding-lost-files) | `find` `grep` `which` `whereis` `locate` |
-| ✍️ | [Practical Exercises](#-practical-exercises) | Hands-on practice |
-| ⚡ | [Command Cheat Sheet](#-important-command-cheat-sheet) | Quick reference |
-| 🧠 | [Things to Remember](#-important-things-to-remember) | Key takeaways |
-| 📈 | [Learning Progress](#-learning-progress) | Where I am and what's next |
+| 🛠️ | [Learning Environment](#learning-environment) | My setup: macOS + Ubuntu VM |
+| 1 | [Introduction to Linux](#chapter-1-introduction-to-linux) | Kernel, distributions, OS comparison, deadlock |
+| 2 | [Bringing Linux Home](#chapter-2-bringing-linux-home) | WSL2, virtual machines, dual boot, first commands |
+| 3 | [Understanding the Language of Linux](#chapter-3-understanding-the-language-of-linux) | Terminal vs shell, prompt, command structure, help |
+| 4 | [Exploring the Linux Filesystem](#chapter-4-exploring-the-linux-filesystem) | Directory layout, paths, navigation, permissions |
+| 5 | [Managing Files and Directories](#chapter-5-managing-files-and-directories) | `mkdir` `touch` `cp` `mv` `rm`, wildcards |
+| 6 | [Finding Lost Files](#chapter-6-finding-lost-files) | `find` `grep` `which` `whereis` `locate` |
+| 📖 | [Part 2: Field Guide](./book_study_linu_part2.md) | Chapters 7–9: `apt`, text editors, redirection |
+| ✍️ | [Practical Exercises](#practical-exercises) | Hands-on practice |
+| ⚡ | [Command Cheat Sheet](#important-command-cheat-sheet) | Quick reference |
+| 🧠 | [Things to Remember](#important-things-to-remember) | Key takeaways |
+| 📈 | [Learning Progress](#learning-progress) | Where I am and what's next |
 
 ---
 
@@ -54,6 +55,8 @@ I use macOS Terminal to practise common Unix commands and plan to use an Ubuntu 
 
 > [!IMPORTANT]
 > macOS is Unix-like, but it is **not** a Linux distribution. Many basic commands are similar, but some options, tools, and administrative commands differ.
+
+<p align="right"><a href="#table-of-contents">⬆️ Back to Top</a></p>
 
 ---
 
@@ -95,19 +98,10 @@ Applications cannot normally control hardware directly. They request services fr
 | 🔐 Security and Permissions | Enforces access controls |
 | ⏱️ CPU Scheduling | Decides which process gets CPU time |
 
-```mermaid
-flowchart LR
-    A["📱 Applications<br/>Browser · Editor · Terminal"] -->|request| K["🧠 KERNEL<br/>manages every resource"]
-    K -->|request| H["🔌 Hardware<br/>CPU · RAM · Disk · Devices"]
-    H -.->|response| K
-    K -.->|response| A
-    classDef app fill:#1f6feb,stroke:#58a6ff,color:#fff;
-    classDef core fill:#8957e5,stroke:#bc8cff,color:#fff;
-    classDef hw fill:#238636,stroke:#3fb950,color:#fff;
-    class A app;
-    class K core;
-    class H hw;
-```
+<p align="center">
+  <img src="./assets/kernel-bridge.svg" alt="Kernel as a bridge between applications and hardware" width="720">
+  <br><sub><i>🎬 Animated: requests flow down to the hardware, responses flow back up</i></sub>
+</p>
 
 ### Simple Example: Opening a Browser
 
@@ -197,15 +191,10 @@ A simplified process:
 | 7 | **CPU scheduling** | The scheduler provides CPU time |
 | 8 | **Execution** | The application begins performing its tasks |
 
-```mermaid
-flowchart LR
-    S1["1<br/>Launch request"] --> S2["2<br/>Load executable"] --> S3["3<br/>Load libraries"] --> S4["4<br/>Create process"]
-    S4 --> S5["5<br/>Allocate memory"] --> S6["6<br/>Create threads"] --> S7["7<br/>CPU scheduling"] --> S8["8<br/>Execution"]
-    classDef step fill:#161b22,stroke:#58a6ff,color:#e6edf3;
-    classDef last fill:#238636,stroke:#3fb950,color:#fff;
-    class S1,S2,S3,S4,S5,S6,S7 step;
-    class S8 last;
-```
+<p align="center">
+  <img src="./assets/app-launch.svg" alt="The eight steps of launching an application" width="720">
+  <br><sub><i>🎬 Animated: each step lights up in order</i></sub>
+</p>
 
 ### Process Creation Differences
 
@@ -221,21 +210,10 @@ A **deadlock** is a situation in which two or more processes are permanently wai
 
 ### Example
 
-```mermaid
-flowchart LR
-    A(("Process A")) -->|"waits for"| R2["Resource 2"]
-    R2 -->|"held by"| B(("Process B"))
-    B -->|"waits for"| R1["Resource 1"]
-    R1 -->|"held by"| A
-    linkStyle 0,2 stroke:#f85149,stroke-width:3px,stroke-dasharray:6 4;
-    linkStyle 1,3 stroke:#3fb950,stroke-width:3px;
-    classDef proc fill:#1f6feb,stroke:#58a6ff,color:#fff;
-    classDef res fill:#9e6a03,stroke:#d29922,color:#fff;
-    class A,B proc;
-    class R1,R2 res;
-```
-
-> 🔴 **Circular wait:** A waits for B's resource, B waits for A's resource, and neither can move.
+<p align="center">
+  <img src="./assets/deadlock.svg" alt="Two processes in a circular wait" width="720">
+  <br><sub><i>🎬 Animated: the red dots show the circular wait that never ends</i></sub>
+</p>
 
 
 - Process A holds Resource 1 and waits for Resource 2.
@@ -264,6 +242,8 @@ Neither can continue because each is waiting for the other.
 - ✅ Design synchronization carefully.
 
 Deadlock is possible in Linux, Windows, and macOS.
+
+<p align="right"><a href="#table-of-contents">⬆️ Back to Top</a></p>
 
 ---
 
@@ -404,6 +384,8 @@ echo $USER
 > [!NOTE]
 > `$USER` is a **variable**, not a command.
 
+<p align="right"><a href="#table-of-contents">⬆️ Back to Top</a></p>
+
 ---
 
 <br>
@@ -422,19 +404,10 @@ echo $USER
 
 ### Relationship
 
-```mermaid
-sequenceDiagram
-    actor U as 👤 User
-    participant T as 🖥️ Terminal
-    participant S as 🐚 Shell (Bash / Zsh)
-    participant O as ⚙️ Operating System
-    U->>T: types the command ls -l
-    T->>S: passes the command
-    S->>O: asks the OS to run it
-    O-->>S: returns the result
-    S-->>T: sends the output text
-    T-->>U: shows the output
-```
+<p align="center">
+  <img src="./assets/command-flow.svg" alt="A command travelling from user to operating system and back" width="720">
+  <br><sub><i>🎬 Animated: a command goes down, the output comes back up</i></sub>
+</p>
 
 
 > [!IMPORTANT]
@@ -565,6 +538,8 @@ man ls
 | Can depend on shell environment | Reports the identity used by the running process |
 
 They often display the same username, but they are not guaranteed to match in every situation.
+
+<p align="right"><a href="#table-of-contents">⬆️ Back to Top</a></p>
 
 ---
 
@@ -941,6 +916,8 @@ sudo command
 
 On Linux, additional user and group information can be found in `/etc/passwd` and `/etc/group`.
 
+<p align="right"><a href="#table-of-contents">⬆️ Back to Top</a></p>
+
 ---
 
 <br>
@@ -1065,14 +1042,10 @@ mv *.jpg chobi/       # moves all .jpg files into chobi/
 
 The `-p` option means **parents**. It creates missing parent directories automatically.
 
-```mermaid
-flowchart LR
-    C["$ mkdir -p animals/cats/persian"] --> A["📁 animals/"] --> B["📁 cats/"] --> P["📁 persian/"]
-    classDef cmd fill:#161b22,stroke:#30363d,color:#3fb950;
-    classDef dir fill:#1f6feb,stroke:#58a6ff,color:#fff;
-    class C cmd;
-    class A,B,P dir;
-```
+<p align="center">
+  <img src="./assets/mkdir-p.svg" alt="mkdir -p creating nested directories step by step" width="680">
+  <br><sub><i>🎬 Animated: parents are created one level at a time</i></sub>
+</p>
 
 **Without `-p`**, this fails if `animals` and `cats` do not exist:
 
@@ -1110,6 +1083,8 @@ Another important behaviour: if the directory already exists, `mkdir -p animals`
 
 > [!TIP]
 > Use `mkdir -p` whenever you want to create nested directories in one command or safely ensure a directory exists.
+
+<p align="right"><a href="#table-of-contents">⬆️ Back to Top</a></p>
 
 ---
 
@@ -1364,6 +1339,8 @@ Program-related files → whereis
 Indexed file search   → locate
 ```
 
+<p align="right"><a href="#table-of-contents">⬆️ Back to Top</a></p>
+
 ---
 
 <br>
@@ -1456,6 +1433,8 @@ Now complete the following tasks:
 | 4 | Search for `janmodin` | `grep -rn "janmodin" golokdhadha` |
 | 5 | Find the location of `grep` | `which grep` |
 
+<p align="right"><a href="#table-of-contents">⬆️ Back to Top</a></p>
+
 ---
 
 <br>
@@ -1519,6 +1498,8 @@ A quick reference for all the important commands covered in Chapters 1–6.
 | `whereis` | Find program-related files | `whereis ls` |
 | `locate` | Search indexed filenames | `locate file.txt` |
 
+<p align="right"><a href="#table-of-contents">⬆️ Back to Top</a></p>
+
 ---
 
 <br>
@@ -1576,6 +1557,8 @@ A quick reference for all the important commands covered in Chapters 1–6.
 
 </details>
 
+<p align="right"><a href="#table-of-contents">⬆️ Back to Top</a></p>
+
 ---
 
 <br>
@@ -1594,7 +1577,9 @@ Chapters 1–6 complete   [█████████████████�
 | 04 | Exploring the Linux Filesystem | ✅ Completed |
 | 05 | Managing Files and Directories | ✅ Completed |
 | 06 | Finding Lost Files | ✅ Completed |
-| 07 | Installing Software with Package Managers | ⏳ Upcoming |
+| 07 | Installing Software with Package Managers | ➡️ [Available in Part 2](./book_study_linu_part2.md#-chapter-07--package-management-with-apt) |
+| 08 | Reading & Editing Files | ➡️ [Available in Part 2](./book_study_linu_part2.md#-chapter-08--reading-and-editing-files) |
+| 09 | Pipes & Redirection | ➡️ [Available in Part 2](./book_study_linu_part2.md#-chapter-09--pipes-and-redirection) |
 
 ---
 
