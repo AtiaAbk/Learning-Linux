@@ -1,11 +1,6 @@
 # Linux Command-Line Notes --- Chapters 7, 8 & 9
 
-> Beginner-friendly, practical notes on package management, reading and
-> editing files, pipes, and input/output redirection.
->
-> These notes are designed for learners who want to understand not only
-> **which command to run**, but also **why it works and when to use
-> it**.
+
 
 ## Table of Contents
 
