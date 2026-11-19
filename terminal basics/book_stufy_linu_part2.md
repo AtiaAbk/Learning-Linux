@@ -27,21 +27,6 @@
 
 ---
 
-## 👋 About This Guide
-
-This is a practical study guide for people learning Linux from the terminal. It is written to explain **what a command does, how its syntax works, what the output may look like, and how it differs from similar commands**.
-
-### By the end, you should be able to:
-
-- Manage software on Ubuntu/Debian using APT.
-- Read short and large text files comfortably.
-- Edit files using Nano and understand basic Vim.
-- Redirect command output into files.
-- Pass the output of one command into another using a pipe.
-- Build useful command pipelines for everyday tasks.
-
-> **Compatibility note:** APT examples are for Ubuntu/Debian-based Linux. Most file and shell examples also work on macOS, although some options and tools can differ. macOS users generally use Homebrew instead of APT.
-
 ## 🧰 Before You Start
 
 Open a terminal and check your system:
