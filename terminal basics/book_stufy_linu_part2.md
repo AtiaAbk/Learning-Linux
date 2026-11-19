@@ -4,8 +4,6 @@
 
 ## Table of Contents
 
--   [About These Notes](#about-these-notes)
--   [Environment and Safety](#environment-and-safety)
 -   [Chapter 7 --- Package Management with
     APT](#chapter-7--package-management-with-apt)
     -   [What Is a Package Manager?](#what-is-a-package-manager)
@@ -48,63 +46,7 @@
 
 ------------------------------------------------------------------------
 
-## About These Notes
 
-This guide covers three connected Linux topics:
-
-  -----------------------------------------------------------------------
-  Chapter                 Main topic              What you will learn
-  ----------------------- ----------------------- -----------------------
-  7                       Package management      Install, update,
-                                                  inspect, and remove
-                                                  software
-
-  8                       Reading and writing     Display, search within,
-                          files                   monitor, and edit text
-                                                  files
-
-  9                       Pipes and redirection   Save command output,
-                                                  pass data between
-                                                  commands, and build
-                                                  useful command
-                                                  pipelines
-  -----------------------------------------------------------------------
-
-### Learning goals
-
-After completing these chapters, you should be able to:
-
-1.  Manage software packages safely on Ubuntu/Debian-based systems.
-2.  Choose the right command to read or edit a text file.
-3.  Understand standard input, standard output, and redirection.
-4.  Connect small commands with pipes to solve larger problems.
-5.  Build a simple pipeline to analyse a text-based server log.
-
-## Environment and Safety
-
-The package-management examples in Chapter 7 use **APT**, which is
-commonly available on Ubuntu and Debian-based distributions.
-
-Check your Linux distribution with:
-
-``` bash
-cat /etc/os-release
-```
-
-Most commands in Chapters 8 and 9 work on Linux and macOS. Some file
-paths and package-management commands are distribution-specific.
-
-### Important safety rules
-
--   Read a command before running it, especially commands that remove
-    software or overwrite files.
--   `>` overwrites an existing file. Use it carefully.
--   Do not run commands with `sudo` unless elevated permission is
-    actually required.
--   Install software from official or trusted sources.
--   Never share private credentials, API keys, or sensitive log data.
-
-------------------------------------------------------------------------
 
 # Chapter 7 --- Package Management with APT
 
