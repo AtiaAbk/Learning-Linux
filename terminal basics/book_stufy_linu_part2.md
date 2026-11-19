@@ -1,188 +1,207 @@
-# Linux Command-Line Notes --- Chapters 7, 8 & 9
+<div align="center">
 
+# 🐧 LINUX COMMAND-LINE FIELD GUIDE
+### Chapters 07 · 08 · 09
 
+**APT Package Management · File Reading & Editing · Pipes & Redirection**
 
-## Table of Contents
+[![Linux](https://img.shields.io/badge/Platform-Linux-FCC624?logo=linux&logoColor=black)](https://www.kernel.org/)
+[![Beginner Friendly](https://img.shields.io/badge/Level-Beginner%20Friendly-2ea44f)](#)
+[![Topics](https://img.shields.io/badge/Chapters-07%20%7C%2008%20%7C%2009-6f42c1)](#)
 
--   [Chapter 7 --- Package Management with
-    APT](#chapter-7--package-management-with-apt)
-    -   [What Is a Package Manager?](#what-is-a-package-manager)
-    -   [Update the Package List](#1-update-the-package-list)
-    -   [Upgrade Installed Packages](#2-upgrade-installed-packages)
-    -   [Install Packages](#3-install-packages)
-    -   [Search and Inspect Packages](#4-search-and-inspect-packages)
-    -   [Remove Packages](#5-remove-packages)
-    -   [Other Software Sources](#6-other-software-sources)
-    -   [Chapter 7 Quick Reference](#chapter-7-quick-reference)
-    -   [Chapter 7 Practice](#chapter-7-practice)
--   [Chapter 8 --- Reading and Writing
-    Files](#chapter-8--reading-and-writing-files)
-    -   [Create a Practice File](#create-a-practice-file)
-    -   [cat](#1-cat--display-a-file)
-    -   [less](#2-less--read-a-file-page-by-page)
-    -   [head and tail](#3-head-and-tail--read-selected-lines)
-    -   [tail -f](#4-tail--f--watch-a-file-live)
-    -   [nano](#5-nano--edit-a-file)
-    -   [vim](#6-vim--a-modal-text-editor)
-    -   [Chapter 8 Quick Reference](#chapter-8-quick-reference)
-    -   [Chapter 8 Practice](#chapter-8-practice)
--   [Chapter 9 --- Pipes and
-    Redirection](#chapter-9--pipes-and-redirection)
-    -   [Standard Input and Output](#standard-input-and-output)
-    -   [Output Redirection: \>](#1-output-redirection-)
-    -   [Append Redirection: \>\>](#2-append-redirection-)
-    -   [Pipes: \|](#3-pipes---connect-commands)
-    -   [Useful Commands for
-        Pipelines](#4-useful-commands-for-pipelines)
-    -   [Input Redirection:
-        \<](#5-input-redirection---send-a-file-as-input)
-    -   [Mini Project: Analyse a Visitor
-        Log](#mini-project-analyse-a-visitor-log)
-    -   [Chapter 9 Quick Reference](#chapter-9-quick-reference)
-    -   [Chapter 9 Practice](#chapter-9-practice)
--   [Common Mistakes](#common-mistakes)
--   [Final Revision Checklist](#final-revision-checklist)
--   [Further Learning](#further-learning)
+*Learn the command. Understand the syntax. See the output. Know when to use it.*
 
-------------------------------------------------------------------------
+</div>
 
+---
 
+## 🧭 Navigation
 
-# Chapter 7 --- Package Management with APT
+| Chapter | Topic | What you will learn |
+|:--:|---|---|
+| **07** | 📦 [Package Management](#-chapter-07--package-management-with-apt) | Search, install, update, upgrade and remove software |
+| **08** | 📄 [Reading & Editing Files](#-chapter-08--reading-and-editing-files) | Display, browse, monitor and edit text files |
+| **09** | 🔀 [Pipes & Redirection](#-chapter-09--pipes-and-redirection) | Control input/output and connect commands |
+| **Bonus** | 🧪 [Command Cookbook](#-command-cookbook--all-commands-at-a-glance) | Quick syntax and demo examples for every command |
+| **Practice** | 🎯 [Hands-on Challenges](#-hands-on-challenges) | Test what you have learned |
 
-## What Is a Package Manager?
+---
 
-A **package** is a software application or a component that an operating
-system can install and manage.
+## 👋 About This Guide
 
-A **package manager** helps you:
+This is a practical study guide for people learning Linux from the terminal. It is written to explain **what a command does, how its syntax works, what the output may look like, and how it differs from similar commands**.
 
--   Find available software.
--   Install applications.
--   Update package information.
--   Upgrade installed applications.
--   Remove software that you no longer need.
--   Manage software dependencies.
+### By the end, you should be able to:
 
-On Ubuntu and Debian, a common package-management tool is **APT**
-(Advanced Package Tool).
+- Manage software on Ubuntu/Debian using APT.
+- Read short and large text files comfortably.
+- Edit files using Nano and understand basic Vim.
+- Redirect command output into files.
+- Pass the output of one command into another using a pipe.
+- Build useful command pipelines for everyday tasks.
 
-Think of APT as a software store that works through the terminal.
+> **Compatibility note:** APT examples are for Ubuntu/Debian-based Linux. Most file and shell examples also work on macOS, although some options and tools can differ. macOS users generally use Homebrew instead of APT.
 
-> **Remember:** APT commands shown in this chapter are for
-> Ubuntu/Debian-based Linux. They are not macOS commands.
+## 🧰 Before You Start
 
-## 1. Update the Package List
+Open a terminal and check your system:
 
-``` bash
+```bash
+cat /etc/os-release
+```
+
+Create a safe practice folder:
+
+```bash
+mkdir -p ~/linux-practice
+cd ~/linux-practice
+```
+
+All practice files in this guide can be created inside this folder.
+
+### Read these symbols first
+
+| Symbol | Meaning |
+|---|---|
+| `$` | Normal user prompt (do not type it) |
+| `#` | Root prompt in examples (do not type it) |
+| `~` | Your home directory |
+| `.` | Current directory |
+| `..` | Parent directory |
+| `&&` | Run the next command only if the previous one succeeds |
+| `\|` | Pipe: send one command's output to another command |
+
+---
+
+# 📦 CHAPTER 07 — PACKAGE MANAGEMENT WITH APT
+
+## 1. What is a package manager?
+
+A **package** is a program or software component that can be installed on a computer. A **package manager** helps the operating system install, update, inspect and remove software.
+
+APT (Advanced Package Tool) is commonly used on Ubuntu and Debian.
+
+Think of APT as a software store controlled from the terminal:
+
+- `search` — find software.
+- `show` — inspect software details.
+- `install` — install software.
+- `update` — refresh the available-package catalogue.
+- `upgrade` — upgrade installed software.
+- `remove` / `purge` — uninstall software.
+
+> 🔐 **Safety:** Commands that change system software commonly need `sudo`. Read the proposed changes before confirming them.
+
+## 2. Refresh package information — `apt update`
+
+### Syntax
+
+```bash
 sudo apt update
 ```
 
-### What does it do?
+### What it does
 
-It downloads the latest package information from the configured software
-repositories.
+Downloads the latest package information from the software repositories configured on your system.
 
-It does **not** upgrade or install all applications.
+It **does not install updates to your applications**. It refreshes the package catalogue so APT knows which versions are available.
 
-Think of it as refreshing the store's catalogue before shopping.
+### Demo
 
-### Important parts
+```bash
+sudo apt update
+```
 
-  Part       Meaning
-  ---------- -----------------------------------------------
-  `sudo`     Run the command with administrator privileges
-  `apt`      Package-management tool
-  `update`   Refresh package information
+Example output (your package sources and version numbers will differ):
 
-## 2. Upgrade Installed Packages
+```text
+Hit:1 http://archive.ubuntu.com/ubuntu noble InRelease
+Get:2 http://archive.ubuntu.com/ubuntu noble-updates InRelease
+Reading package lists... Done
+Building dependency tree... Done
+```
 
-``` bash
+## 3. Upgrade installed software — `apt upgrade`
+
+### Syntax
+
+```bash
 sudo apt upgrade
 ```
 
-### What does it do?
+### What it does
 
-It installs available upgrades for packages that are already installed
-on the system.
+Installs available upgrades for packages already installed on the system.
 
-### Update vs. Upgrade
+### `update` vs `upgrade`
 
-  -----------------------------------------------------------------------
-  Command                 Purpose                 Simple comparison
-  ----------------------- ----------------------- -----------------------
-  `sudo apt update`       Refreshes package       Checks the latest store
-                          information             catalogue
+| Command | Actual job | Easy way to remember |
+|---|---|---|
+| `sudo apt update` | Refreshes package information | Refresh the shop catalogue |
+| `sudo apt upgrade` | Upgrades installed packages | Update the software you own |
 
-  `sudo apt upgrade`      Upgrades installed      Updates the software
-                          packages                you already have
-  -----------------------------------------------------------------------
+Run them together:
 
-A common maintenance command is:
-
-``` bash
+```bash
 sudo apt update && sudo apt upgrade
 ```
 
-### Why use `&&`?
+`&&` means the second command runs only if the first command succeeds.
 
-`&&` runs the second command only if the first command finishes
-successfully.
+## 4. Install software — `apt install`
 
-In this example:
+### Syntax
 
-1.  APT refreshes the package information.
-2.  If that succeeds, APT upgrades installed packages.
-
-## 3. Install Packages
+```bash
+sudo apt install package-name
+```
 
 ### Install one package
 
-``` bash
-sudo apt install htop
+```bash
+sudo apt install tree
 ```
-
-This installs `htop`, an interactive process-monitoring tool.
-
-After installation, run:
-
-``` bash
-htop
-```
-
-Press `q` to quit `htop`.
 
 ### Install multiple packages
 
-``` bash
-sudo apt install tree curl wget
+```bash
+sudo apt install tree curl wget htop
 ```
 
-APT can install several packages in one command.
+| Package | What it is used for |
+|---|---|
+| `tree` | Displays folders and files in a tree structure |
+| `curl` | Transfers data to or from a URL |
+| `wget` | Downloads files from the web |
+| `htop` | Interactive process and resource monitor |
 
-  Package   Common purpose
-  --------- -----------------------------------------------
-  `tree`    Displays directories in a tree-like structure
-  `curl`    Transfers data to or from a URL
-  `wget`    Downloads files from the web
-  `htop`    Displays running processes interactively
+Try the installed command:
 
-Try:
-
-``` bash
-cd ~
-tree
+```bash
+tree ~
 ```
 
-If `tree` is not installed, install it first.
+Example:
 
-## 4. Search and Inspect Packages
+```text
+/home/learner
+├── Documents
+├── Downloads
+└── linux-practice
+    └── notes.txt
+```
 
-You do not need to install a package just to learn about it.
+## 5. Search for software — `apt search`
 
-### Search for a package
+### Syntax
 
-``` bash
+```bash
+apt search keyword
+```
+
+### Demo
+
+```bash
 apt search screenshot
 ```
 
@@ -190,1024 +209,887 @@ Searches package names and descriptions for the word `screenshot`.
 
 Another example:
 
-``` bash
+```bash
 apt search cowsay
 ```
 
-### Display package information
+**Use it when:** You know what kind of application you need but do not know the exact package name.
 
-``` bash
+## 6. Inspect a package — `apt show`
+
+### Syntax
+
+```bash
+apt show package-name
+```
+
+### Demo
+
+```bash
 apt show htop
 ```
 
-This displays information such as:
+This displays package details such as its description, version, dependencies and download size.
 
--   Package name
--   Version
--   Description
--   Package size
--   Dependencies
+**Difference:** `apt search` helps you find a package; `apt show` gives details about a package you have identified.
 
-### List installed packages
+## 7. List installed packages — `apt list`
 
-``` bash
+### Syntax
+
+```bash
 apt list --installed
 ```
 
 Displays packages currently installed through APT.
 
-You can count the displayed lines with:
+Count the displayed lines:
 
-``` bash
+```bash
 apt list --installed | wc -l
 ```
 
-The result may include a heading, so it is an approximate count rather
-than a guaranteed exact package count.
+The count can include a heading, so treat it as an approximate count.
 
-### Do these commands need `sudo`?
+## 8. Remove software — `apt remove`, `apt purge`, `apt autoremove`
 
-Usually, no.
+These commands are related, but they do different jobs.
 
-``` bash
-apt search htop
-apt show htop
-apt list --installed
-```
+| Command | What it removes |
+|---|---|
+| `sudo apt remove tree` | Removes the package; package configuration may remain |
+| `sudo apt purge tree` | Removes the package and its package-managed system configuration |
+| `sudo apt autoremove` | Removes automatically installed dependencies that are no longer needed |
 
-These commands inspect information. They do not normally change
-installed software.
+### Examples
 
-**General rule:** Reading information usually does not require `sudo`;
-changing system software usually does.
-
-## 5. Remove Packages
-
-APT provides different removal commands.
-
-### Remove a package
-
-``` bash
+```bash
 sudo apt remove tree
 ```
 
-Removes the package but normally leaves its system-wide configuration
-files behind.
-
-### Purge a package
-
-``` bash
+```bash
 sudo apt purge tree
 ```
 
-Removes the package and its package-managed system configuration files.
-
-### Remove unused dependencies
-
-``` bash
+```bash
 sudo apt autoremove
 ```
 
-Removes packages that were installed automatically as dependencies but
-are no longer needed.
+> ⚠️ Before confirming a removal, inspect APT's list of packages that it proposes to remove. Do not assume every proposed removal is harmless.
 
-### Remove vs. Purge
+## 9. Other software sources
 
-  -----------------------------------------------------------------------
-  Command                             What happens
-  ----------------------------------- -----------------------------------
-  `sudo apt remove package-name`      Removes the package; configuration
-                                      files may remain
+### Local `.deb` package
 
-  `sudo apt purge package-name`       Removes the package and its
-                                      package-managed configuration files
+A `.deb` file is a Debian software package.
 
-  `sudo apt autoremove`               Removes unused automatically
-                                      installed dependencies
-  -----------------------------------------------------------------------
-
-> **Caution:** Review APT's proposed changes before confirming. Do not
-> assume every suggested removal is harmless.
-
-## 6. Other Software Sources
-
-Not every application is available in the default APT repositories.
-Ubuntu/Debian systems may use other software distribution methods.
-
-### A. `.deb` files
-
-A `.deb` file is a Debian software package file.
-
-For example:
-
-``` bash
-sudo apt install ./google-chrome-stable_current_amd64.deb
+```bash
+sudo apt install ./application.deb
 ```
 
-The `./` tells APT to use the local file in the current directory rather
-than search for a package by name in the repositories.
+`./` tells APT to use a local file in the current directory.
 
-Only install `.deb` files from official or trusted sources. Also make
-sure the package architecture matches your system.
+Only install packages from official or trusted sources, and check that the architecture is compatible.
 
-### B. PPA
+### PPA — Personal Package Archive
 
-**PPA** means Personal Package Archive.
+A PPA is an additional software repository.
 
-A PPA is an additional software repository, often used to distribute
-software or newer package versions.
+General syntax:
 
-Example syntax:
-
-``` bash
+```bash
 sudo add-apt-repository ppa:owner/archive
 sudo apt update
 ```
 
-The repository name above is a placeholder, not a real repository to
-add.
+`owner/archive` is a placeholder, not a repository to copy blindly. Only add repositories you trust.
 
-Adding a repository gives its publisher a route to provide software to
-your system. Only add PPAs from publishers you trust.
-
-### C. Snap
+### Snap
 
 Snap is another application packaging and distribution system.
 
-Example:
+Example on a compatible Ubuntu system:
 
-``` bash
+```bash
 sudo snap install code --classic
 ```
 
-This example installs Visual Studio Code through Snap on a compatible
-Ubuntu system where the Snap service is available.
+---
 
-### Which source should you use?
+## 📌 Chapter 07 — Quick Command Card
 
-1.  Search the official distribution repositories first.
-2.  If the application is not available, check the application's
-    official website.
-3.  Read the installation instructions and verify the source before
-    installing.
+| Command | Purpose | Needs `sudo`? |
+|---|---|:--:|
+| `sudo apt update` | Refresh package catalogue | Yes |
+| `sudo apt upgrade` | Upgrade installed packages | Yes |
+| `sudo apt install name` | Install a package | Yes |
+| `apt search word` | Search packages | Usually no |
+| `apt show name` | Inspect package information | Usually no |
+| `apt list --installed` | List installed packages | Usually no |
+| `sudo apt remove name` | Remove a package | Yes |
+| `sudo apt purge name` | Remove package and package-managed config | Yes |
+| `sudo apt autoremove` | Remove unused auto-installed dependencies | Yes |
+| `sudo snap install name` | Install a Snap package | Usually yes |
 
-Avoid unofficial download sites that offer modified or repackaged
-installers.
+---
 
-## Chapter 7 Quick Reference
+# 📄 CHAPTER 08 — READING AND EDITING FILES
 
-  -----------------------------------------------------------------------
-  Command                             Purpose
-  ----------------------------------- -----------------------------------
-  `sudo apt update`                   Refresh package information
+## 1. Prepare a practice file
 
-  `sudo apt upgrade`                  Upgrade installed packages
+Run these commands inside `~/linux-practice`:
 
-  `sudo apt install package`          Install a package
+```bash
+cd ~/linux-practice
 
-  `apt search keyword`                Search for packages
-
-  `apt show package`                  Display package information
-
-  `apt list --installed`              List installed packages
-
-  `sudo apt remove package`           Remove a package
-
-  `sudo apt purge package`            Remove a package and
-                                      package-managed configuration
-
-  `sudo apt autoremove`               Remove unused automatic
-                                      dependencies
-
-  `sudo snap install package`         Install a Snap package
-  -----------------------------------------------------------------------
-
-## Chapter 7 Practice
-
-Try these tasks on an Ubuntu/Debian test environment:
-
-1.  Refresh the package list.
-
-2.  Search for `cowsay`.
-
-3.  Display the information for `htop`.
-
-4.  Install `tree` and run it in your home directory.
-
-5.  Install `cowsay`, then run:
-
-    ``` bash
-    cowsay "Hello, Linux!"
-    ```
-
-6.  Install `fortune` and try:
-
-    ``` bash
-    fortune | cowsay
-    ```
-
-7.  Count the lines in the installed-package list:
-
-    ``` bash
-    apt list --installed | wc -l
-    ```
-
-8.  Practise the difference between `remove`, `purge`, and `autoremove`
-    in a safe test environment.
-
-------------------------------------------------------------------------
-
-# Chapter 8 --- Reading and Writing Files
-
-Linux provides several commands for reading and editing text files. Each
-command is useful in a different situation.
-
-## Create a Practice File
-
-First, move to your home directory:
-
-``` bash
-cd ~
-```
-
-Create a diary file using `echo`:
-
-``` bash
 echo "Day 1: Linu came home" > linu-diary.txt
-echo "Day 2: Linu scratched the sofa" >> linu-diary.txt
+echo "Day 2: Linu played" >> linu-diary.txt
 echo "Day 3: Linu went to the vet" >> linu-diary.txt
 echo "Day 4: Linu ate fish" >> linu-diary.txt
 echo "Day 5: Linu slept all day" >> linu-diary.txt
 ```
 
-The first command creates or overwrites the file. The later commands
-append new lines.
+We will use this file to practise reading and editing commands.
 
-## 1. `cat` --- Display a File
+## 2. `cat` — display file content
 
 ### Syntax
 
-``` bash
+```bash
 cat filename
 ```
 
-Example:
+### Demo
 
-``` bash
+```bash
 cat linu-diary.txt
-```
-
-Displays the complete content of the file in the terminal.
-
-### When should you use `cat`?
-
-Use it when:
-
--   The file is short.
--   You want to display the whole file quickly.
--   You want to combine the contents of multiple files.
-
-Example:
-
-``` bash
-cat file1.txt file2.txt
-```
-
-Displays the content of `file1.txt` followed by `file2.txt`.
-
-> `cat` is useful for short files. For a very large file, its output may
-> scroll past the terminal screen.
-
-## 2. `less` --- Read a File Page by Page
-
-### Syntax
-
-``` bash
-less filename
-```
-
-Example:
-
-``` bash
-less linu-diary.txt
-```
-
-`less` opens an interactive viewer. It does not normally load the entire
-file onto one terminal screen.
-
-### Useful `less` controls
-
-  Key                     Action
-  ----------------------- ------------------------------
-  `Space` or `PageDown`   Move down one page
-  `PageUp`                Move up one page
-  `↑` / `↓`               Move up or down
-  `/keyword`              Search forward for a keyword
-  `n`                     Go to the next search match
-  `g`                     Go to the beginning
-  `G`                     Go to the end
-  `q`                     Quit
-
-### `cat` vs. `less`
-
-  `cat`                           `less`
-  ------------------------------- -----------------------------------
-  Displays the content directly   Opens an interactive viewer
-  Best for short files            Useful for long files
-  Output may scroll quickly       Lets you move through the file
-  No built-in page navigation     Supports searching and navigation
-
-**Easy rule:** Use `cat` for short files and `less` for long files.
-
-## 3. `head` and `tail` --- Read Selected Lines
-
-Sometimes you do not need the entire file. You may only need its
-beginning or end.
-
-### `head` --- Display the beginning
-
-``` bash
-head linu-diary.txt
-```
-
-By default, it displays the first 10 lines.
-
-Display only the first 2 lines:
-
-``` bash
-head -n 2 linu-diary.txt
-```
-
-### `tail` --- Display the end
-
-``` bash
-tail linu-diary.txt
-```
-
-By default, it displays the last 10 lines.
-
-Display only the last 2 lines:
-
-``` bash
-tail -n 2 linu-diary.txt
-```
-
-### Quick comparison
-
-  Command                Purpose
-  ---------------------- ----------------
-  `head file.txt`        First 10 lines
-  `head -n 5 file.txt`   First 5 lines
-  `tail file.txt`        Last 10 lines
-  `tail -n 5 file.txt`   Last 5 lines
-
-## 4. `tail -f` --- Watch a File Live
-
-One of the most useful commands for monitoring log files is:
-
-``` bash
-tail -f linu-diary.txt
-```
-
-### What does `-f` mean?
-
-`-f` means **follow**.
-
-The command keeps running and displays new lines when they are added to
-the file.
-
-### Try a live demonstration
-
-Open two terminal windows.
-
-**Terminal 1:**
-
-``` bash
-tail -f ~/linu-diary.txt
-```
-
-**Terminal 2:**
-
-``` bash
-echo "Day 6: Linu learned something new" >> ~/linu-diary.txt
-```
-
-Look at Terminal 1. The new line should appear automatically.
-
-Stop the live monitoring with:
-
-``` text
-Ctrl + C
-```
-
-### Real-world use case
-
-A system administrator may monitor a web server log:
-
-``` bash
-tail -f /var/log/nginx/access.log
-```
-
-This can show new access-log entries as requests arrive. You need
-suitable permissions to read some system log files.
-
-## 5. `nano` --- Edit a File
-
-`nano` is a beginner-friendly terminal text editor.
-
-### Open or create a file
-
-``` bash
-nano linu-diary.txt
-```
-
-You can now type, delete, and edit text.
-
-### Important nano shortcuts
-
-  Shortcut     Action
-  ------------ ------------------------
-  `Ctrl + O`   Write Out (save)
-  `Enter`      Confirm the filename
-  `Ctrl + X`   Exit
-  `Ctrl + K`   Cut the current line
-  `Ctrl + U`   Paste the cut text
-  `Ctrl + W`   Search within the file
-
-In nano's help bar, `^` means the Ctrl key. For example, `^X` means
-`Ctrl + X`.
-
-### Save and exit
-
-1.  Press `Ctrl + O`.
-2.  Press `Enter` to confirm the filename.
-3.  Press `Ctrl + X` to exit.
-
-If you try to exit with unsaved changes, nano asks whether you want to
-save them.
-
-## 6. `vim` --- A Modal Text Editor
-
-`vim` is a powerful terminal text editor. It uses different modes for
-entering text and running editing commands.
-
-Open a file:
-
-``` bash
-vim test.txt
-```
-
-### The two modes to know
-
-  Mode          Purpose
-  ------------- -----------------------------------
-  Normal mode   Navigate and run editing commands
-  Insert mode   Type text into the file
-
-### Essential Vim commands
-
-  Key or command   Action
-  ---------------- -----------------------------
-  `i`              Enter Insert mode
-  `Esc`            Return to Normal mode
-  `:w`             Save
-  `:q`             Quit
-  `:wq`            Save and quit
-  `:q!`            Quit without saving changes
-
-### How to exit Vim
-
-If you accidentally open Vim and only want to leave:
-
-1.  Press `Esc`.
-2.  Type `:q!`.
-3.  Press `Enter`.
-
-### How to edit and save
-
-1.  Open a file:
-
-    ``` bash
-    vim test.txt
-    ```
-
-2.  Press `i` and type your text.
-
-3.  Press `Esc`.
-
-4.  Type `:wq`.
-
-5.  Press `Enter`.
-
-Verify the content:
-
-``` bash
-cat test.txt
-```
-
-> You do not need to master Vim immediately. Knowing how to enter Insert
-> mode, return to Normal mode, save, and exit is a useful starting
-> point.
-
-## Chapter 8 Quick Reference
-
-  Command                Purpose
-  ---------------------- -----------------------------------
-  `cat file.txt`         Display the complete file
-  `less file.txt`        Read a file page by page
-  `head file.txt`        Display the first 10 lines
-  `head -n 5 file.txt`   Display the first 5 lines
-  `tail file.txt`        Display the last 10 lines
-  `tail -n 5 file.txt`   Display the last 5 lines
-  `tail -f file.txt`     Follow new lines live
-  `nano file.txt`        Edit a file with Nano
-  `vim file.txt`         Open a file in Vim
-  `Ctrl + C`             Stop a running foreground command
-
-## Chapter 8 Practice
-
-1.  Create a file named `my-goals.txt` using Nano.
-
-2.  Write at least five lines and save the file.
-
-3.  Display the file using `cat`.
-
-4.  Display only its first line using:
-
-    ``` bash
-    head -n 1 my-goals.txt
-    ```
-
-5.  Display only its last two lines using:
-
-    ``` bash
-    tail -n 2 my-goals.txt
-    ```
-
-6.  Open `/etc/passwd` with `less`, search for `root`, go to the end
-    with `G`, and quit with `q`.
-
-7.  Practise `tail -f` in two terminal windows.
-
-8.  Open `test.txt` in Vim, enter two lines, save with `:wq`, and verify
-    with `cat`.
-
-------------------------------------------------------------------------
-
-# Chapter 9 --- Pipes and Redirection
-
-This chapter introduces one of the most powerful ideas in Linux:
-connecting small commands to perform larger tasks.
-
-## Standard Input and Output
-
-A command can receive input, process it, and produce output.
-
-Linux commonly uses three standard data streams:
-
-  ------------------------------------------------------------------------
-  Stream           Name                   File descriptor Purpose
-  ---------------- ---------------- --------------------- ----------------
-  Standard input   `stdin`                            `0` Data received by
-                                                          a command
-
-  Standard output  `stdout`                           `1` Normal output
-                                                          produced by a
-                                                          command
-
-  Standard error   `stderr`                           `2` Error messages
-                                                          produced by a
-                                                          command
-  ------------------------------------------------------------------------
-
-By default, input usually comes from the keyboard, while output and
-error messages usually appear in the terminal.
-
-Redirection lets us change where input comes from or where output goes.
-
-## 1. Output Redirection: `>`
-
-### Syntax
-
-``` bash
-command > filename
-```
-
-The `>` operator sends a command's standard output to a file instead of
-displaying it in the terminal.
-
-Example:
-
-``` bash
-ls -l > file-list.txt
-```
-
-Now display the saved output:
-
-``` bash
-cat file-list.txt
-```
-
-### What happened?
-
-1.  `ls -l` generated a directory listing.
-2.  `>` redirected that output.
-3.  The output was saved in `file-list.txt`.
-
-### Important warning
-
-`>` creates a file if it does not exist. If the file already exists, its
-previous content is normally overwritten.
-
-For example:
-
-``` bash
-echo "Old content" > example.txt
-echo "New content" > example.txt
-cat example.txt
 ```
 
 Output:
 
-``` text
-New content
+```text
+Day 1: Linu came home
+Day 2: Linu played
+Day 3: Linu went to the vet
+Day 4: Linu ate fish
+Day 5: Linu slept all day
 ```
 
-The old content was replaced.
+### Other useful forms
 
-## 2. Append Redirection: `>>`
+Display two files one after another:
 
-The `>>` operator adds output to the end of a file without removing its
-existing content.
-
-Example:
-
-``` bash
-echo "Day 1: Linu came home" > diary.txt
-echo "Day 2: Linu played" >> diary.txt
-echo "Day 3: Linu slept" >> diary.txt
+```bash
+cat file1.txt file2.txt
 ```
 
-Display the file:
+Create a file from typed terminal input:
 
-``` bash
+```bash
+cat > newfile.txt
+```
+
+Type your text, then press `Ctrl + D` to finish input and save.
+
+**Best for:** Quickly displaying short files or joining file contents.
+
+## 3. `less` — read a file page by page
+
+### Syntax
+
+```bash
+less filename
+```
+
+### Demo
+
+```bash
+less linu-diary.txt
+```
+
+`less` opens an interactive viewer. You can move through the file without printing the entire content at once.
+
+### Navigation keys
+
+| Key | Action |
+|---|---|
+| `Space` / `PageDown` | Move down one page |
+| `PageUp` | Move up one page |
+| `↑` / `↓` | Move one line |
+| `/word` | Search forward for `word` |
+| `n` | Next search match |
+| `g` | Beginning of file |
+| `G` | End of file |
+| `q` | Quit |
+
+### `cat` vs `less`
+
+| `cat` | `less` |
+|---|---|
+| Prints content directly | Opens a navigable viewer |
+| Convenient for short files | Better for long files |
+| No built-in page navigation | Supports searching and page navigation |
+
+**Rule of thumb:** `cat` for a quick look; `less` for exploring a long file.
+
+## 4. `head` — show the beginning of a file
+
+### Syntax
+
+```bash
+head [option] filename
+```
+
+By default, `head` displays the first 10 lines.
+
+```bash
+head linu-diary.txt
+```
+
+Display only the first two lines:
+
+```bash
+head -n 2 linu-diary.txt
+```
+
+Example output:
+
+```text
+Day 1: Linu came home
+Day 2: Linu played
+```
+
+**Use it when:** You want to inspect the beginning of a file, such as the first lines of a CSV or log.
+
+## 5. `tail` — show the end of a file
+
+### Syntax
+
+```bash
+tail [option] filename
+```
+
+By default, `tail` displays the last 10 lines.
+
+```bash
+tail linu-diary.txt
+```
+
+Display only the last two lines:
+
+```bash
+tail -n 2 linu-diary.txt
+```
+
+Example output:
+
+```text
+Day 4: Linu ate fish
+Day 5: Linu slept all day
+```
+
+### `head` vs `tail`
+
+| Command | Default output | Typical use |
+|---|---|---|
+| `head file.txt` | First 10 lines | Check the beginning |
+| `tail file.txt` | Last 10 lines | Check the newest/end entries |
+
+## 6. `tail -f` — follow a file live
+
+### Syntax
+
+```bash
+tail -f filename
+```
+
+`-f` means **follow**. The command keeps running and prints new lines when they are appended to the file.
+
+### Two-terminal demo
+
+**Terminal 1:**
+
+```bash
+tail -f linu-diary.txt
+```
+
+**Terminal 2:**
+
+```bash
+echo "Day 6: Linu learned a new trick" >> linu-diary.txt
+```
+
+The new line appears in Terminal 1.
+
+Stop monitoring with:
+
+```text
+Ctrl + C
+```
+
+**Real-world use:** Watching a server log while new requests arrive.
+
+```bash
+tail -f /var/log/nginx/access.log
+```
+
+You may need permission to read system log files.
+
+## 7. `nano` — beginner-friendly text editor
+
+### Syntax
+
+```bash
+nano filename
+```
+
+### Demo
+
+```bash
+nano my-notes.txt
+```
+
+Type your text inside the editor.
+
+| Shortcut | Action |
+|---|---|
+| `Ctrl + O` | Save (Write Out) |
+| `Enter` | Confirm filename |
+| `Ctrl + X` | Exit |
+| `Ctrl + K` | Cut current line |
+| `Ctrl + U` | Paste cut text |
+| `Ctrl + W` | Search |
+
+In Nano's shortcut bar, `^` means `Ctrl`. So `^X` means `Ctrl + X`.
+
+### Save and exit
+
+1. Press `Ctrl + O`.
+2. Press `Enter` to confirm.
+3. Press `Ctrl + X` to exit.
+
+## 8. `vim` — a modal text editor
+
+### Syntax
+
+```bash
+vim filename
+```
+
+Vim uses modes. The most important beginner modes are:
+
+| Mode | Purpose |
+|---|---|
+| Normal mode | Navigate and run editing commands |
+| Insert mode | Type text |
+
+### Beginner editing demo
+
+```bash
+vim test.txt
+```
+
+1. Press `i` to enter Insert mode.
+2. Type your text.
+3. Press `Esc` to return to Normal mode.
+4. Type `:wq` and press `Enter` to save and quit.
+
+### Essential Vim commands
+
+| Command | Action |
+|---|---|
+| `i` | Enter Insert mode |
+| `Esc` | Return to Normal mode |
+| `:w` | Save |
+| `:q` | Quit |
+| `:wq` | Save and quit |
+| `:q!` | Quit without saving changes |
+
+**If you get stuck:** Press `Esc`, type `:q!`, and press `Enter`.
+
+### Nano vs Vim
+
+| Nano | Vim |
+|---|---|
+| Easier for beginners | More powerful, modal editor |
+| Shortcuts shown on screen | Commands depend on current mode |
+| Good for quick edits | Useful for advanced editing workflows |
+
+---
+
+## 📌 Chapter 08 — Quick Command Card
+
+| Command | Purpose |
+|---|---|
+| `cat file.txt` | Print the whole file |
+| `cat a.txt b.txt` | Print multiple files in sequence |
+| `cat > file.txt` | Create/write a file from terminal input |
+| `less file.txt` | Browse a file page by page |
+| `head file.txt` | Show first 10 lines |
+| `head -n 5 file.txt` | Show first 5 lines |
+| `tail file.txt` | Show last 10 lines |
+| `tail -n 5 file.txt` | Show last 5 lines |
+| `tail -f file.txt` | Follow newly appended lines |
+| `nano file.txt` | Open file in Nano |
+| `vim file.txt` | Open file in Vim |
+
+---
+
+# 🔀 CHAPTER 09 — PIPES AND REDIRECTION
+
+## 1. Understand the three standard streams
+
+A command receives data, processes it and produces output. Linux uses three standard streams:
+
+| Stream | Name | Number | Meaning |
+|---|---|:--:|---|
+| `stdin` | Standard input | `0` | Data a command reads |
+| `stdout` | Standard output | `1` | Normal output |
+| `stderr` | Standard error | `2` | Error messages |
+
+By default, a command usually reads from the keyboard and prints output to the terminal. Redirection lets you change those destinations.
+
+## 2. `>` — redirect output (overwrite)
+
+### Syntax
+
+```bash
+command > filename
+```
+
+Sends standard output into a file.
+
+### Demo
+
+```bash
+echo "First note" > output.txt
+cat output.txt
+```
+
+Output:
+
+```text
+First note
+```
+
+Now run:
+
+```bash
+echo "Replacement note" > output.txt
+cat output.txt
+```
+
+Output:
+
+```text
+Replacement note
+```
+
+The old content was overwritten.
+
+> ⚠️ **Be careful:** `>` replaces existing file content. Check the filename before running it.
+
+## 3. `>>` — append output
+
+### Syntax
+
+```bash
+command >> filename
+```
+
+Adds standard output to the end of a file without replacing the existing content.
+
+### Demo
+
+```bash
+echo "Line 1" > diary.txt
+echo "Line 2" >> diary.txt
+echo "Line 3" >> diary.txt
 cat diary.txt
 ```
 
 Output:
 
-``` text
-Day 1: Linu came home
-Day 2: Linu played
-Day 3: Linu slept
+```text
+Line 1
+Line 2
+Line 3
 ```
 
-### `>` vs. `>>`
+### `>` vs `>>`
 
-  Operator   Meaning                      Existing content
-  ---------- ---------------------------- ------------------
-  `>`        Create or overwrite a file   Replaced
-  `>>`       Append to a file             Preserved
+| Operator | Meaning | Existing content |
+|---|---|---|
+| `>` | Write/overwrite | Replaced |
+| `>>` | Append | Preserved |
 
-**Easy rule:**
+Memory trick: **one arrow replaces; two arrows add.**
 
--   One arrow (`>`) = write from the beginning; existing content is
-    overwritten.
--   Two arrows (`>>`) = add to the end; existing content is preserved.
-
-## 3. Pipes: `|` --- Connect Commands
-
-A **pipe** sends the standard output of one command to the standard
-input of another command.
+## 4. `|` — pipe output into another command
 
 ### Syntax
 
-``` bash
+```bash
 command1 | command2
 ```
 
-Think of it as:
+A pipe sends the **standard output** of the command on the left to the **standard input** of the command on the right.
 
-``` text
-Command 1 output  --->  Command 2 input
+```text
+┌────────────┐       pipe        ┌────────────┐
+│  Command 1 │ ─────────────────▶│  Command 2 │
+│  produces  │     output →      │  receives  │
+│  output    │                    │  input     │
+└────────────┘                    └────────────┘
 ```
 
-### Example 1: Read a long directory listing page by page
+### Demo 1 — browse a long list
 
-``` bash
+```bash
 ls /usr/bin | less
 ```
 
-`ls /usr/bin` produces a list of files. The pipe sends that list to
-`less`, allowing you to browse it page by page.
+`ls` lists entries. `less` lets you browse the list. Press `q` to quit.
 
-Press `q` to quit.
+### Demo 2 — filter matching lines
 
-### Example 2: Search command names
-
-``` bash
+```bash
 ls /usr/bin | grep zip
 ```
 
-How it works:
+`grep zip` prints lines containing `zip`.
 
-1.  `ls /usr/bin` lists entries in `/usr/bin`.
-2.  `|` sends the list to `grep`.
-3.  `grep zip` displays lines containing `zip`.
+### Demo 3 — count matching lines
 
-### Example 3: Count the results
-
-``` bash
+```bash
 ls /usr/bin | grep zip | wc -l
 ```
 
-The commands work in sequence:
+The output of each command becomes the input of the next command.
 
-``` text
-ls /usr/bin
-     |
-     v
-grep zip
-     |
-     v
-wc -l
-     |
-     v
-Number of matching lines
+## 5. `grep` — search for matching text
+
+### Syntax
+
+```bash
+grep [option] "pattern" filename
 ```
 
-This is the basic idea behind a command pipeline.
+Create a sample file:
 
-## 4. Useful Commands for Pipelines
+```bash
+cat > names.txt << 'EOF'
+Rahim
+Karim
+Atia
+Raisa
+Karim
+EOF
+```
 
-### A. `wc` --- Count lines, words, and bytes
+Search for `Karim`:
 
-`wc` means **word count**.
+```bash
+grep "Karim" names.txt
+```
 
-Basic syntax:
+Output:
 
-``` bash
-wc filename
+```text
+Karim
+Karim
 ```
 
 Useful options:
 
-  Option   Meaning
-  -------- ------------------
-  `-l`     Count lines
-  `-w`     Count words
-  `-c`     Count bytes
-  `-m`     Count characters
+| Option | Meaning | Example |
+|---|---|---|
+| `-i` | Ignore uppercase/lowercase differences | `grep -i "atia" names.txt` |
+| `-n` | Show line numbers | `grep -n "Karim" names.txt` |
+| `-v` | Show lines that do not match | `grep -v "Karim" names.txt` |
+| `-c` | Count matching lines | `grep -c "Karim" names.txt` |
 
-Examples:
+**Difference:** `grep` searches for matching text; `wc -l` counts lines. Combine them when you need to count matches:
 
-``` bash
-wc linu-diary.txt
-wc -l linu-diary.txt
-wc -w linu-diary.txt
-wc -c linu-diary.txt
+```bash
+grep "Karim" names.txt | wc -l
 ```
 
-### Why does `wc -l` sometimes show a filename?
+## 6. `wc` — count lines, words and bytes
 
-Compare:
+`wc` means **word count**.
 
-``` bash
-wc -l otithi-khata.txt
+### Syntax
+
+```bash
+wc [option] [filename]
 ```
 
-Possible output:
+| Option | Counts |
+|---|---|
+| `-l` | Lines |
+| `-w` | Words |
+| `-c` | Bytes |
+| `-m` | Characters |
 
-``` text
-10 otithi-khata.txt
+### Demo
+
+```bash
+wc names.txt
+wc -l names.txt
+wc -w names.txt
+wc -c names.txt
 ```
 
-Here, the filename is passed directly as a command-line argument.
+### Why does `<` change the output?
 
-Now compare:
+Compare these two commands:
 
-``` bash
-wc -l < otithi-khata.txt
+```bash
+wc -l names.txt
 ```
 
-Output:
+Example output:
 
-``` text
-10
+```text
+5 names.txt
 ```
 
-Here, `<` redirects the file into the command's standard input. Since
-`wc` receives standard input rather than a named file argument, it
-displays the count without the filename.
+Now:
 
-Both commands count the lines. The difference is how the input is
-provided and how the output is labelled.
-
-### B. `sort` --- Sort lines
-
-Basic syntax:
-
-``` bash
-sort filename
+```bash
+wc -l < names.txt
 ```
 
-Example:
+Example output:
 
-``` bash
+```text
+5
+```
+
+Both count the lines. The difference is how the input reaches `wc`:
+
+- `wc -l names.txt` — the filename is passed as a command-line argument.
+- `wc -l < names.txt` — the shell redirects the file to standard input.
+
+Because the second command receives standard input rather than a named-file argument, `wc` prints only the count.
+
+## 7. `<` — redirect input from a file
+
+### Syntax
+
+```bash
+command < filename
+```
+
+The shell opens the file and supplies its content as the command's standard input.
+
+### Demo
+
+```bash
+sort < names.txt
+```
+
+This asks `sort` to read from standard input, which is connected to `names.txt`.
+
+Compare it with:
+
+```bash
 sort names.txt
 ```
 
-Sort numbers numerically:
+Both sort the file's lines. The first uses input redirection; the second passes the filename as an argument.
 
-``` bash
-sort -n numbers.txt
+## 8. `sort` — arrange lines
+
+### Syntax
+
+```bash
+sort [option] filename
 ```
 
-Sort in reverse order:
+Create a file:
 
-``` bash
-sort -r names.txt
-```
-
-Sort numbers in descending order:
-
-``` bash
-sort -rn numbers.txt
-```
-
-  Option   Meaning
-  -------- ---------------------------
-  `-n`     Numeric sorting
-  `-r`     Reverse the sorting order
-
-### C. `uniq` --- Handle repeated adjacent lines
-
-Example file:
-
-``` text
-apple
-apple
-banana
-banana
+```bash
+cat > fruits.txt << 'EOF'
 orange
+apple
+banana
+apple
+EOF
 ```
 
-Run:
+Alphabetical sort:
 
-``` bash
-uniq fruits.txt
+```bash
+sort fruits.txt
 ```
 
 Output:
 
-``` text
+```text
+apple
 apple
 banana
 orange
 ```
 
-Count adjacent repeated lines:
+Useful options:
 
-``` bash
-uniq -c fruits.txt
+| Option | Meaning | Example |
+|---|---|---|
+| `-r` | Reverse order | `sort -r fruits.txt` |
+| `-n` | Numeric sort | `sort -n numbers.txt` |
+| `-rn` | Numeric, reverse order | `sort -rn numbers.txt` |
+
+For example, create numeric data:
+
+```bash
+printf "20\n3\n100\n11\n" > numbers.txt
+sort -n numbers.txt
 ```
 
-Important: `uniq` normally compares adjacent lines. If identical entries
-are separated, sort them first:
+Output:
 
-``` bash
+```text
+3
+11
+20
+100
+```
+
+## 9. `uniq` — report or remove adjacent duplicates
+
+### Syntax
+
+```bash
+uniq [option] filename
+```
+
+`uniq` normally checks **adjacent** repeated lines. It does not automatically group identical lines that are separated.
+
+Example:
+
+```bash
+uniq fruits.txt
+```
+
+Because the duplicate `apple` entries are not adjacent in the original file, both may remain.
+
+Sort first, then use `uniq`:
+
+```bash
+sort fruits.txt | uniq
+```
+
+Count repeated adjacent lines:
+
+```bash
 sort fruits.txt | uniq -c
 ```
 
-This is why `sort` is often used before `uniq`.
+Example output:
 
-### D. `cut` --- Extract fields from lines
+```text
+      2 apple
+      1 banana
+      1 orange
+```
 
-`cut` extracts selected sections from each line.
+Useful option:
 
-Example file:
+| Option | Meaning |
+|---|---|
+| `-c` | Show the number of occurrences for each adjacent group |
 
-``` text
+## 10. `cut` — extract fields or columns
+
+### Syntax
+
+```bash
+cut -d 'delimiter' -f field_number filename
+```
+
+`cut` extracts selected fields from each line.
+
+Create a file:
+
+```bash
+cat > people.txt << 'EOF'
 Rahim:Developer:Dhaka
 Karim:Designer:Rajshahi
 Nila:Student:Khulna
+EOF
 ```
 
-Display the first field:
+Extract the first field:
 
-``` bash
+```bash
 cut -d ':' -f 1 people.txt
 ```
 
 Output:
 
-``` text
+```text
 Rahim
 Karim
 Nila
 ```
 
-Meaning:
+Extract the second field:
 
-  Part       Meaning
-  ---------- --------------------------
-  `-d ':'`   Use `:` as the delimiter
-  `-f 1`     Select field number 1
-
-Display the second field:
-
-``` bash
+```bash
 cut -d ':' -f 2 people.txt
 ```
 
-For space-separated data, an example is:
+Output:
 
-``` bash
-cut -d ' ' -f 1 otithi-khata.txt
+```text
+Developer
+Designer
+Student
 ```
 
-This selects the first field separated by a literal space. For more
-complicated or irregular whitespace, other tools such as `awk` may be
-more suitable.
+| Part | Meaning |
+|---|---|
+| `-d ':'` | The colon is the delimiter |
+| `-f 1` | Select field 1 |
+| `-f 2` | Select field 2 |
 
-## 5. Input Redirection: `<` --- Send a File as Input
-
-The `<` operator redirects a file to a command's standard input.
+## 11. `&&` — run the next command only after success
 
 ### Syntax
 
-``` bash
-command < filename
+```bash
+command1 && command2
 ```
 
-Example:
+Demo:
 
-``` bash
-wc -l < otithi-khata.txt
+```bash
+mkdir demo-folder && cd demo-folder
 ```
 
-The content of `otithi-khata.txt` is supplied to `wc` through standard
-input.
+If `mkdir demo-folder` succeeds, the shell runs `cd demo-folder`.
 
-Compare:
+**Pipe vs `&&`:**
 
-``` bash
-wc -l otithi-khata.txt
-```
+| Operator | What it connects | When does the next command run? |
+|---|---|---|
+| `\|` | Output of one command to input of another | As part of the pipeline |
+| `&&` | Two commands in sequence | Only if the first succeeds |
 
-with:
+---
 
-``` bash
-wc -l < otithi-khata.txt
-```
+## 🧪 Mini Project — Analyse a Visitor Log
 
-Both count the lines, but the first command receives a filename argument
-while the second receives redirected standard input.
+### Goal
 
-### Redirection symbols at a glance
+Find which IP address appears most often in a simple website access log.
 
-  -----------------------------------------------------------------------
-  Symbol                  Name                    Purpose
-  ----------------------- ----------------------- -----------------------
-  `>`                     Output redirection      Send standard output to
-                                                  a file; overwrite it
+### Step 1 — Create sample data
 
-  `>>`                    Append redirection      Add standard output to
-                                                  the end of a file
-
-  `<`                     Input redirection       Read standard input
-                                                  from a file
-
-  `|`                     Pipe                    Send one command's
-                                                  standard output to
-                                                  another command
-  -----------------------------------------------------------------------
-
-------------------------------------------------------------------------
-
-## Mini Project: Analyse a Visitor Log
-
-### Scenario
-
-Imagine that you manage a website. Your server records visitor IP
-addresses and the pages they request.
-
-You want to find which IP address made the most requests.
-
-This is a simplified example of a task that can be useful when analysing
-server logs.
-
-### Step 1 --- Create a sample log file
-
-Move to your home directory:
-
-``` bash
-cd ~
-```
-
-Create the file:
-
-``` bash
+```bash
 cat > otithi-khata.txt << 'EOF'
 10.0.0.5 GET /home
 10.0.0.9 GET /about
@@ -1222,281 +1104,255 @@ cat > otithi-khata.txt << 'EOF'
 EOF
 ```
 
-The text between the two `EOF` markers is written into the file. The
-quoted marker prevents shell expansion of special characters inside the
-supplied text.
+Inspect the file:
 
-Verify the file:
-
-``` bash
+```bash
 cat otithi-khata.txt
 ```
 
-### Step 2 --- Extract only the IP addresses
+### Step 2 — Extract the IP address
 
-``` bash
+```bash
 cut -d ' ' -f 1 otithi-khata.txt
 ```
 
-Explanation:
+The first field is the IP address.
 
--   `-d ' '` uses a space as the delimiter.
--   `-f 1` selects the first field.
--   The first field in each log line is the visitor IP address.
+### Step 3 — Sort the addresses
 
-Expected output:
-
-``` text
-10.0.0.5
-10.0.0.9
-10.0.0.5
-10.0.0.7
-10.0.0.5
-10.0.0.9
-10.0.0.5
-10.0.0.7
-10.0.0.5
-10.0.0.9
-```
-
-### Step 3 --- Sort the IP addresses
-
-``` bash
+```bash
 cut -d ' ' -f 1 otithi-khata.txt | sort
 ```
 
-Now identical IP addresses appear next to one another.
+Sorting groups identical IP addresses together.
 
-### Step 4 --- Count repeated IP addresses
+### Step 4 — Count each address
 
-``` bash
+```bash
 cut -d ' ' -f 1 otithi-khata.txt | sort | uniq -c
 ```
 
 Expected output:
 
-``` text
+```text
       5 10.0.0.5
       2 10.0.0.7
       3 10.0.0.9
 ```
 
-Why did we use `sort` before `uniq -c`?
+### Step 5 — Put the highest count first
 
-Because `uniq` counts adjacent repeated lines. Sorting brings identical
-IP addresses together first.
-
-### Step 5 --- Sort by request count
-
-``` bash
+```bash
 cut -d ' ' -f 1 otithi-khata.txt | sort | uniq -c | sort -rn
 ```
 
 Expected output:
 
-``` text
+```text
       5 10.0.0.5
       3 10.0.0.9
       2 10.0.0.7
 ```
 
-Explanation:
+### Step 6 — Show only the top result
 
--   `-n` sorts numerically.
--   `-r` reverses the order.
--   Together, `-rn` places the largest count first.
-
-### Step 6 --- Display only the most frequent IP
-
-``` bash
+```bash
 cut -d ' ' -f 1 otithi-khata.txt | sort | uniq -c | sort -rn | head -n 1
 ```
 
 Expected output:
 
-``` text
+```text
       5 10.0.0.5
 ```
 
-### What did we accomplish?
+### Understand the pipeline
 
-We combined five small commands:
-
-``` text
-cut  →  sort  →  uniq -c  →  sort -rn  →  head -n 1
+```text
+otithi-khata.txt
+       │
+       ▼
+      cut       → Extract IP addresses
+       │
+       ▼
+      sort      → Group identical addresses
+       │
+       ▼
+     uniq -c    → Count each address
+       │
+       ▼
+    sort -rn    → Highest count first
+       │
+       ▼
+   head -n 1    → Display the top result
 ```
 
-Each command performs one specific task:
+> This is a learning example, not a complete security analysis. A high request count alone does not prove malicious activity.
 
-  Command       Job
-  ------------- ---------------------------------------
-  `cut`         Extract the IP address
-  `sort`        Group identical IP addresses together
-  `uniq -c`     Count each adjacent group
-  `sort -rn`    Put the highest count first
-  `head -n 1`   Display the top result
+---
 
-This is a practical example of the Unix philosophy: use small tools that
-do one job well, then connect them to solve a larger problem.
+# 🗂️ COMMAND COOKBOOK — ALL COMMANDS AT A GLANCE
 
-> **Important:** This sample log is for learning. Real security
-> investigations require more context; a high request count alone does
-> not prove malicious activity.
+Use this section as a quick revision sheet. Each row shows the command's main job and a practical example.
 
-## Chapter 9 Practice
+## 📦 Package management
 
-1.  Save your command history to a file:
+| Command | Main job | Demo |
+|---|---|---|
+| `sudo` | Run a command with elevated privileges | `sudo apt update` |
+| `apt update` | Refresh package information | `sudo apt update` |
+| `apt upgrade` | Upgrade installed packages | `sudo apt upgrade` |
+| `apt install` | Install package(s) | `sudo apt install tree` |
+| `apt search` | Search package catalogue | `apt search browser` |
+| `apt show` | Show package details | `apt show htop` |
+| `apt list` | List packages | `apt list --installed` |
+| `apt remove` | Remove a package | `sudo apt remove tree` |
+| `apt purge` | Remove package and package-managed config | `sudo apt purge tree` |
+| `apt autoremove` | Remove unused auto-installed dependencies | `sudo apt autoremove` |
+| `add-apt-repository` | Add a software repository | `sudo add-apt-repository ppa:owner/archive` |
+| `snap install` | Install a Snap package | `sudo snap install code --classic` |
 
-    ``` bash
-    history > amar-itihas.txt
-    ```
+## 📄 File reading and editing
 
-2.  Count the commands in your history:
+| Command | Main job | Demo |
+|---|---|---|
+| `cat` | Print file content | `cat notes.txt` |
+| `less` | Browse a file interactively | `less notes.txt` |
+| `head` | Show the first lines | `head -n 5 notes.txt` |
+| `tail` | Show the last lines | `tail -n 5 notes.txt` |
+| `tail -f` | Follow new lines live | `tail -f app.log` |
+| `nano` | Edit in Nano | `nano notes.txt` |
+| `vim` | Edit in Vim | `vim notes.txt` |
 
-    ``` bash
-    history | wc -l
-    ```
+## 🔀 Search, count and process text
 
-3.  Find commands in your history that contain `apt`:
+| Command | Main job | Demo |
+|---|---|---|
+| `grep` | Find matching text | `grep "error" app.log` |
+| `wc` | Count lines, words or bytes | `wc -l notes.txt` |
+| `sort` | Sort lines | `sort names.txt` |
+| `uniq` | Handle adjacent duplicate lines | `sort names.txt \| uniq -c` |
+| `cut` | Extract fields | `cut -d ':' -f 1 people.txt` |
+| `ls` | List directory entries | `ls -l` |
+| `echo` | Print text | `echo "Hello Linux"` |
+| `printf` | Print formatted text | `printf "one\ntwo\n"` |
+| `mkdir` | Create a directory | `mkdir practice` |
+| `cd` | Change directory | `cd ~/linux-practice` |
+| `history` | Show shell command history | `history` |
+| `tree` | Display directory structure | `tree ~/linux-practice` |
 
-    ``` bash
-    history | grep apt
-    ```
+## ➡️ Operators and special keys
 
-4.  Count how many lines in the diary contain the word `Linu`:
+| Symbol / key | Main job | Demo |
+|---|---|---|
+| `>` | Redirect output; overwrite file | `echo "Hi" > hi.txt` |
+| `>>` | Append output to file | `echo "Again" >> hi.txt` |
+| `<` | Read file as standard input | `wc -l < hi.txt` |
+| `\|` | Pipe output into another command | `cat hi.txt \| grep Hi` |
+| `&&` | Run next command only after success | `mkdir test && cd test` |
+| `Ctrl + C` | Stop foreground process | Stop `tail -f` |
+| `Ctrl + D` | Send end-of-input | Finish `cat > file.txt` |
+| `Ctrl + O` | Save in Nano | Nano save |
+| `Ctrl + X` | Exit Nano | Nano exit |
+| `Esc` | Return to Vim Normal mode | Vim editing |
+| `:wq` | Save and quit Vim | Vim command line |
+| `:q!` | Quit Vim without saving | Vim command line |
 
-    ``` bash
-    grep -i "linu" linu-diary.txt | wc -l
-    ```
+> **Note:** The cookbook includes a few supporting commands used in the demonstrations, not only the main chapter headings. Some commands (such as `tree`, `htop`, `snap`, and `add-apt-repository`) may need to be installed or may not be available on every distribution.
 
-5.  Find the most frequently requested page in `otithi-khata.txt`. Hint:
-    extract the third field instead of the first.
+---
 
-6.  Run:
+# 🎯 HANDS-ON CHALLENGES
 
-    ``` bash
-    ls /usr/bin | grep "^z"
-    ```
+Try each task before looking back at the examples.
 
-    Observe the output. The `^` character in this pattern means the
-    beginning of a line.
+## Level 1 — Beginner
 
-7.  Create a file using `>` and then add another line using `>>`. Verify
-    the difference with `cat`.
+- [ ] Create a directory named `linux-lab`.
+- [ ] Create a file named `about-me.txt`.
+- [ ] Add three lines to the file.
+- [ ] Display the file using `cat`.
+- [ ] Show only the first two lines using `head`.
+- [ ] Show only the last line using `tail`.
 
-8.  Compare the outputs of:
+## Level 2 — File skills
 
-    ``` bash
-    wc -l otithi-khata.txt
-    wc -l < otithi-khata.txt
-    ```
+- [ ] Open a file using `less` and search for a word.
+- [ ] Edit a file using Nano and save it.
+- [ ] Open a file in Vim, insert text, save and quit.
+- [ ] Monitor a file using `tail -f` while adding a line from another terminal.
 
-------------------------------------------------------------------------
+## Level 3 — Pipes and redirection
 
-# Common Mistakes
+- [ ] Save the output of `ls -l` into `directory.txt`.
+- [ ] Append the current date to that file.
+- [ ] Search the file for a word using `grep`.
+- [ ] Count the lines using `wc -l`.
+- [ ] Compare `wc -l directory.txt` with `wc -l < directory.txt`.
+- [ ] Sort a list of names and count duplicates.
 
-  ------------------------------------------------------------------------
-  Mistake                 Why it is a problem     Better approach
-  ----------------------- ----------------------- ------------------------
-  Running `apt upgrade`   Package information may Run `sudo apt update`
-  without refreshing      be outdated             first
-  package information                             
+## Level 4 — Package management
 
-  Using `sudo` for every  Unnecessary             Use `sudo` only when
-  command                 administrator access    needed
-                          increases risk          
+On an Ubuntu/Debian test system:
 
-  Using `>` when you      Existing file content   Use `>>` to append
-  meant to append         is overwritten          
+- [ ] Search for `htop`.
+- [ ] Inspect its package information.
+- [ ] Install it.
+- [ ] Run it and exit with `q`.
+- [ ] Practise removing it only if you no longer need it.
 
-  Expecting `uniq` to     `uniq` normally checks  Use
-  count all repeated      adjacent lines          `sort file \| uniq -c`
-  lines automatically                             
+---
 
-  Forgetting to quit      The terminal remains    Press `q`
-  `less`                  inside the viewer       
+# 🧠 FINAL REVISION — WHAT MUST YOU REMEMBER?
 
-  Getting stuck in Vim    Vim has different modes Press `Esc`, then use
-                                                  `:q!` or `:wq`
+| If you want to… | Use |
+|---|---|
+| Refresh available package information | `sudo apt update` |
+| Upgrade installed software | `sudo apt upgrade` |
+| Find a package | `apt search` |
+| Read a short file | `cat` |
+| Browse a long file | `less` |
+| See the first lines | `head` |
+| See the last lines | `tail` |
+| Watch new log entries | `tail -f` |
+| Edit a file simply | `nano` |
+| Send output to a new/overwritten file | `>` |
+| Add output to an existing file | `>>` |
+| Feed a file to a command | `<` |
+| Connect commands | `\|` |
+| Search text | `grep` |
+| Count lines | `wc -l` |
+| Sort lines | `sort` |
+| Count adjacent duplicates | `uniq -c` (often after `sort`) |
+| Extract a field | `cut` |
 
-  Forgetting to stop      It keeps monitoring the Press `Ctrl + C`
-  `tail -f`               file                    
+## 📚 Official references
 
-  Assuming `<` and `>` do One redirects input;    Remember the direction
-  the same job            the other redirects     of data flow
-                          output                  
-  ------------------------------------------------------------------------
+- [Ubuntu Documentation](https://documentation.ubuntu.com/)
+- [Debian APT User's Guide](https://www.debian.org/doc/manuals/apt-guide/)
+- [GNU Coreutils Manual](https://www.gnu.org/software/coreutils/manual/)
+- [GNU Bash Reference Manual](https://www.gnu.org/software/bash/manual/)
+- [GNU Grep Manual](https://www.gnu.org/software/grep/manual/)
+- [Nano Editor](https://www.nano-editor.org/)
+- [Vim Documentation](https://www.vim.org/docs.php)
+- [Homebrew — macOS package manager](https://brew.sh/)
 
-# Final Revision Checklist
+## 🍎 Note for macOS learners
 
-Use this checklist to test your understanding.
+The file, text-processing and shell-redirection examples are useful on macOS too. However:
 
-## Chapter 7 --- Package Management
+- APT is for Debian/Ubuntu-based Linux, not macOS.
+- macOS users commonly use [Homebrew](https://brew.sh/) to install command-line tools.
+- macOS includes BSD versions of some utilities, while many Linux distributions use GNU versions. A few flags and behaviours may differ.
 
--   [ ] I understand what a package manager does.
--   [ ] I can explain the difference between `apt update` and
-    `apt upgrade`.
--   [ ] I can install and search for packages.
--   [ ] I understand `remove`, `purge`, and `autoremove`.
--   [ ] I know why software should come from trusted sources.
+---
 
-## Chapter 8 --- Reading and Writing Files
+<div align="center">
 
--   [ ] I can display a file with `cat`.
--   [ ] I can read a long file with `less`.
--   [ ] I can display selected lines with `head` and `tail`.
--   [ ] I understand how `tail -f` monitors new lines.
--   [ ] I can edit and save a file using Nano.
--   [ ] I know the basic Vim commands needed to edit, save, and exit.
+### ⭐ Keep practising. Understand the flow, not just the command.
 
-## Chapter 9 --- Pipes and Redirection
+**Linux is not about memorising hundreds of commands. It is about combining a few useful tools to solve real problems.**
 
--   [ ] I understand `stdin`, `stdout`, and `stderr`.
--   [ ] I know the difference between `>`, `>>`, `<`, and `|`.
--   [ ] I can use `wc`, `sort`, `uniq`, and `cut`.
--   [ ] I understand why `sort` is often used before `uniq`.
--   [ ] I can connect multiple commands in a pipeline.
--   [ ] I can analyse the sample visitor log.
+*End of Chapters 07–09*
 
-------------------------------------------------------------------------
-
-# Further Learning
-
-Official documentation and useful references:
-
--   [Ubuntu Documentation](https://documentation.ubuntu.com/)
--   [Debian APT User's
-    Guide](https://www.debian.org/doc/manuals/apt-guide/)
--   [GNU Coreutils
-    Manual](https://www.gnu.org/software/coreutils/manual/)
--   [GNU Bash Reference
-    Manual](https://www.gnu.org/software/bash/manual/)
--   [Nano Editor](https://www.nano-editor.org/)
--   [Vim Documentation](https://www.vim.org/docs.php)
-
-## Notes for macOS Users
-
-The file-reading, text-processing, and shell-redirection commands in
-these notes are also useful on macOS because macOS includes a Unix-based
-command-line environment.
-
-However:
-
--   `apt` is for Debian/Ubuntu-based Linux, not macOS.
--   macOS users commonly install command-line software with
-    [Homebrew](https://brew.sh/).
--   Some command options differ between GNU/Linux and the BSD tools
-    included with macOS.
--   A command that works on Ubuntu may need a small adjustment on macOS.
-
-## Final Thought
-
-Linux becomes easier when you stop memorising commands as isolated
-instructions and start understanding how data moves through the
-terminal.
-
-A single command can do a small job. A well-designed pipeline can turn
-those small jobs into a powerful workflow.
-
-**Keep practising, experiment carefully, and always understand a command
-before running it.**
+</div>
