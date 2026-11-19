@@ -7,7 +7,13 @@
   <img src="https://img.shields.io/badge/Chapters-23-22d3ee?style=for-the-badge" alt="23 chapters">
   <img src="https://img.shields.io/badge/Interview_Q%26A-50-f472b6?style=for-the-badge" alt="50 interview questions">
   <img src="https://img.shields.io/badge/Labs-8-4ade80?style=for-the-badge" alt="8 labs">
-  <img src="https://img.shields.io/badge/Level-Beginner_→_Advanced-a78bfa?style=for-the-badge" alt="Beginner to advanced">
+  <a href="https://www.linkedin.com/in/atia-sanjida-085947233/"><img src="https://img.shields.io/badge/Author-Atia%20Sanjida-blueviolet?style=for-the-badge&logo=linkedin" alt="Author: Atia Sanjida"></a>
+</p>
+
+<p align="center">
+  <b>Author:</b> <a href="https://www.linkedin.com/in/atia-sanjida-085947233/"><b>Atia Sanjida</b></a> &nbsp;•&nbsp;
+  <b>GitHub:</b> <a href="https://github.com/AtiaAbk">@AtiaAbk</a> &nbsp;•&nbsp;
+  <b>Contact:</b> <a href="mailto:atia.abk@gmail.com">atia.abk@gmail.com</a>
 </p>
 
 <p align="center">
@@ -17,7 +23,8 @@
   <a href="#13-boot-process-and-the-files-it-touches">🚀 Boot</a> &nbsp;•&nbsp;
   <a href="#19-troubleshooting-scenarios">🛠️ Troubleshooting</a> &nbsp;•&nbsp;
   <a href="#20-interview-questions-and-model-answers">🎯 Interview</a> &nbsp;•&nbsp;
-  <a href="#21-quick-revision-cheat-sheet">📝 Cheat sheet</a>
+  <a href="#21-quick-revision-cheat-sheet">📝 Cheat sheet</a> &nbsp;•&nbsp;
+  <a href="#author--credits">✍️ Author</a>
 </p>
 
 <p align="center">
@@ -57,6 +64,7 @@
 | 📝 | **[Quick-revision cheat sheet](#21-quick-revision-cheat-sheet)** | One-page revision table + mnemonic |
 | 📖 | **[Glossary](#22-glossary)** | Key terms defined |
 | 📚 | **[Standards and authoritative references](#23-standards-and-authoritative-references)** | Standards, man pages and specifications |
+| ✍️ | **[Author & Credits](#author--credits)** | Author profile, contact channels & portfolio links |
 
 ### 🧭 Suggested learning path
 
@@ -2444,7 +2452,24 @@ Practice on at least one Debian/Ubuntu system and one RPM-based system. Compare 
 
 
 <p align="center">
+  <img src="assets/divider.svg" alt="" width="100%">
+</p>
+
+## ✍️ Author & Credits
+
+| Field | Details |
+|---|---|
+| **Author** | **Atia Sanjida** |
+| **Focus** | Linux Systems, Cybersecurity & Infrastructure Engineering |
+| **LinkedIn** | [linkedin.com/in/atia-sanjida](https://www.linkedin.com/in/atia-sanjida-085947233/) |
+| **GitHub** | [@AtiaAbk](https://github.com/AtiaAbk) |
+| **Email** | [atia.abk@gmail.com](mailto:atia.abk@gmail.com) |
+| **Repository** | [Learning-Linux](https://github.com/AtiaAbk/Learning-Linux) |
+
+> *This guide is authored and maintained by **Atia Sanjida** as part of an ongoing Linux and systems engineering learning portfolio. Contributions, corrections, and inquiries are always welcome!*
+
+<p align="center">
   <img src="assets/footer.svg" alt="Understand the purpose, then verify on a real machine" width="100%">
 </p>
 
-<p align="center"><sub>Built for learning and interview prep · maintained by <a href="https://github.com/AtiaAbk">@AtiaAbk</a> · ⭐ star the repo if it helped you</sub></p>
+<p align="center"><sub>Built for learning and interview prep · Authored & maintained by <a href="https://github.com/AtiaAbk">Atia Sanjida (@AtiaAbk)</a> · ⭐ star the repo if it helped you</sub></p>

@@ -9,6 +9,7 @@
 ![Status](https://img.shields.io/badge/Status-In%20Progress-blue?style=for-the-badge)
 ![Notes](https://img.shields.io/badge/Notes-Chapters%201--6-orange?style=for-the-badge)
 [![Part 2](https://img.shields.io/badge/Next-Part%202%20(Ch%207--9)-8a2be2?style=for-the-badge&logo=gitbook&logoColor=white)](./book_study_linu_part2.md)
+[![Author](https://img.shields.io/badge/Author-Atia%20Sanjida-blueviolet?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/atia-sanjida-085947233/)
 
 **What each command does · why it is used · how it works · when to use it**
 
@@ -1586,6 +1587,8 @@ Chapters 1–6 complete   [█████████████████�
 <div align="center">
 
 *Last updated: November 2026 · Repository: Linux Learning Notes · Coverage: Chapters 1–6*
+
+<sub>Authored & maintained by <a href="https://github.com/AtiaAbk">Atia Sanjida (@AtiaAbk)</a> · <a href="https://www.linkedin.com/in/atia-sanjida-085947233/">LinkedIn</a></sub>
 
 ⭐ *Keep practising, one command at a time.* ⭐
 
