@@ -8,7 +8,7 @@
 ![Shell](https://img.shields.io/badge/Shell-Bash-4EAA25?style=for-the-badge&logo=gnubash&logoColor=white)
 ![Status](https://img.shields.io/badge/Status-In%20Progress-blue?style=for-the-badge)
 ![Notes](https://img.shields.io/badge/Notes-Chapters%201--6-orange?style=for-the-badge)
-![Progress](https://img.shields.io/badge/Progress-6%2F7%20Chapters-success?style=for-the-badge)
+[![Part 2](https://img.shields.io/badge/Next-Part%202%20(Ch%207--9)-8a2be2?style=for-the-badge&logo=gitbook&logoColor=white)](./book_study_linu_part2.md)
 
 **What each command does · why it is used · how it works · when to use it**
 
@@ -25,17 +25,18 @@
 
 | # | Chapter | What You'll Find |
 |:-:|---|---|
-| 🛠️ | [Learning Environment](#-learning-environment) | My setup: macOS + Ubuntu VM |
-| 1 | [Introduction to Linux](#-chapter-1-introduction-to-linux) | Kernel, distributions, OS comparison, deadlock |
-| 2 | [Bringing Linux Home](#-chapter-2-bringing-linux-home) | WSL2, virtual machines, dual boot, first commands |
-| 3 | [Understanding the Language of Linux](#-chapter-3-understanding-the-language-of-linux) | Terminal vs shell, prompt, command structure, help |
-| 4 | [Exploring the Linux Filesystem](#-chapter-4-exploring-the-linux-filesystem) | Directory layout, paths, navigation, permissions |
-| 5 | [Managing Files and Directories](#-chapter-5-managing-files-and-directories) | `mkdir` `touch` `cp` `mv` `rm`, wildcards |
-| 6 | [Finding Lost Files](#-chapter-6-finding-lost-files) | `find` `grep` `which` `whereis` `locate` |
-| ✍️ | [Practical Exercises](#-practical-exercises) | Hands-on practice |
-| ⚡ | [Command Cheat Sheet](#-important-command-cheat-sheet) | Quick reference |
-| 🧠 | [Things to Remember](#-important-things-to-remember) | Key takeaways |
-| 📈 | [Learning Progress](#-learning-progress) | Where I am and what's next |
+| 🛠️ | [Learning Environment](#learning-environment) | My setup: macOS + Ubuntu VM |
+| 1 | [Introduction to Linux](#chapter-1-introduction-to-linux) | Kernel, distributions, OS comparison, deadlock |
+| 2 | [Bringing Linux Home](#chapter-2-bringing-linux-home) | WSL2, virtual machines, dual boot, first commands |
+| 3 | [Understanding the Language of Linux](#chapter-3-understanding-the-language-of-linux) | Terminal vs shell, prompt, command structure, help |
+| 4 | [Exploring the Linux Filesystem](#chapter-4-exploring-the-linux-filesystem) | Directory layout, paths, navigation, permissions |
+| 5 | [Managing Files and Directories](#chapter-5-managing-files-and-directories) | `mkdir` `touch` `cp` `mv` `rm`, wildcards |
+| 6 | [Finding Lost Files](#chapter-6-finding-lost-files) | `find` `grep` `which` `whereis` `locate` |
+| 📖 | [Part 2: Field Guide](./book_study_linu_part2.md) | Chapters 7–9: `apt`, text editors, redirection |
+| ✍️ | [Practical Exercises](#practical-exercises) | Hands-on practice |
+| ⚡ | [Command Cheat Sheet](#important-command-cheat-sheet) | Quick reference |
+| 🧠 | [Things to Remember](#important-things-to-remember) | Key takeaways |
+| 📈 | [Learning Progress](#learning-progress) | Where I am and what's next |
 
 ---
 
@@ -54,6 +55,8 @@ I use macOS Terminal to practise common Unix commands and plan to use an Ubuntu 
 
 > [!IMPORTANT]
 > macOS is Unix-like, but it is **not** a Linux distribution. Many basic commands are similar, but some options, tools, and administrative commands differ.
+
+<p align="right"><a href="#table-of-contents">⬆️ Back to Top</a></p>
 
 ---
 
@@ -95,6 +98,11 @@ Applications cannot normally control hardware directly. They request services fr
 | 🔐 Security and Permissions | Enforces access controls |
 | ⏱️ CPU Scheduling | Decides which process gets CPU time |
 
+<p align="center">
+  <img src="./assets/kernel-bridge.svg" alt="Kernel as a bridge between applications and hardware" width="720">
+  <br><sub><i>🎬 Animated: requests flow down to the hardware, responses flow back up</i></sub>
+</p>
+
 ### Simple Example: Opening a Browser
 
 1. The operating system receives the request to start the application.
@@ -114,6 +122,20 @@ These two terms are related but not identical.
 - **Linux Distribution:** the Linux kernel combined with other software, system utilities, package-management tools, and often a desktop environment.
 
 **Examples of distributions:** Ubuntu · Debian · Fedora · Arch Linux
+
+```mermaid
+flowchart BT
+    HW["🔌 Hardware"] --> K["🧠 Linux Kernel"]
+    K --> D["📦 Distribution<br/>kernel + utilities + package manager + desktop"]
+    D --> U1["Ubuntu"]
+    D --> U2["Debian"]
+    D --> U3["Fedora"]
+    D --> U4["Arch Linux"]
+    classDef core fill:#8957e5,stroke:#bc8cff,color:#fff;
+    classDef distro fill:#1f6feb,stroke:#58a6ff,color:#fff;
+    class K core;
+    class D,U1,U2,U3,U4 distro;
+```
 
 | Linux Kernel | Linux Distribution |
 |---|---|
@@ -169,6 +191,11 @@ A simplified process:
 | 7 | **CPU scheduling** | The scheduler provides CPU time |
 | 8 | **Execution** | The application begins performing its tasks |
 
+<p align="center">
+  <img src="./assets/app-launch.svg" alt="The eight steps of launching an application" width="720">
+  <br><sub><i>🎬 Animated: each step lights up in order</i></sub>
+</p>
+
 ### Process Creation Differences
 
 | OS | Common Mechanism |
@@ -183,10 +210,11 @@ A **deadlock** is a situation in which two or more processes are permanently wai
 
 ### Example
 
-```text
-Process A ──holds──▶ Resource 1 ◀──waits for── Process B
-Process A ──waits for──▶ Resource 2 ◀──holds── Process B
-```
+<p align="center">
+  <img src="./assets/deadlock.svg" alt="Two processes in a circular wait" width="720">
+  <br><sub><i>🎬 Animated: the red dots show the circular wait that never ends</i></sub>
+</p>
+
 
 - Process A holds Resource 1 and waits for Resource 2.
 - Process B holds Resource 2 and waits for Resource 1.
@@ -215,6 +243,8 @@ Neither can continue because each is waiting for the other.
 
 Deadlock is possible in Linux, Windows, and macOS.
 
+<p align="right"><a href="#table-of-contents">⬆️ Back to Top</a></p>
+
 ---
 
 <br>
@@ -230,6 +260,21 @@ Deadlock is possible in Linux, Windows, and macOS.
 | 🪟 **WSL2** | Windows users who want Linux inside Windows | ⭐ Easy |
 | 📦 **Virtual Machine** | Running Linux safely alongside your main OS | ⭐⭐ Medium |
 | 💽 **Dual Boot** | Native performance and hardware access | ⭐⭐⭐ Advanced |
+
+```mermaid
+flowchart TD
+    A{"💻 What computer do you have?"}
+    A -->|Windows| B["🪟 WSL2<br/>wsl --install"]
+    A -->|"Mac (Apple Silicon)"| C["📦 Virtual Machine<br/>ARM64 Ubuntu image"]
+    A -->|"Want native speed"| D["💽 Dual Boot<br/>needs partitioning + backup"]
+    B --> E["✅ Easiest start"]
+    C --> F["✅ Safe and isolated"]
+    D --> G["⚠️ Advanced: risk of data loss"]
+    classDef good fill:#238636,stroke:#3fb950,color:#fff;
+    classDef warn fill:#9e6a03,stroke:#d29922,color:#fff;
+    class E,F good;
+    class G warn;
+```
 
 ### Method 1: WSL2
 
@@ -339,6 +384,8 @@ echo $USER
 > [!NOTE]
 > `$USER` is a **variable**, not a command.
 
+<p align="right"><a href="#table-of-contents">⬆️ Back to Top</a></p>
+
 ---
 
 <br>
@@ -357,18 +404,11 @@ echo $USER
 
 ### Relationship
 
-```text
-   👤 User
-     │
-     ▼
- 🖥️ Terminal
-     │
-     ▼
- 🐚 Shell (Bash / Zsh / Fish)
-     │
-     ▼
- ⚙️ Operating System
-```
+<p align="center">
+  <img src="./assets/command-flow.svg" alt="A command travelling from user to operating system and back" width="720">
+  <br><sub><i>🎬 Animated: a command goes down, the output comes back up</i></sub>
+</p>
+
 
 > [!IMPORTANT]
 > macOS Terminal normally uses **Zsh** by default, not Bash.
@@ -499,6 +539,8 @@ man ls
 
 They often display the same username, but they are not guaranteed to match in every situation.
 
+<p align="right"><a href="#table-of-contents">⬆️ Back to Top</a></p>
+
 ---
 
 <br>
@@ -516,6 +558,32 @@ Linux uses a hierarchical filesystem that starts from a single root directory:
 ```
 
 Everything in the Linux directory structure exists under this root. Unlike Windows, which commonly uses drive letters such as `C:` and `D:`, Linux organizes everything under `/`.
+
+### 🌳 The Tree at a Glance
+
+```mermaid
+flowchart TD
+    root["/ (root)"]
+    root --> home["/home<br/>users' files"]
+    root --> etc["/etc<br/>configuration"]
+    root --> var["/var<br/>logs and caches"]
+    root --> usr["/usr<br/>programs"]
+    root --> bin["/bin<br/>essential commands"]
+    root --> tmp["/tmp<br/>temporary files"]
+    root --> boot["/boot<br/>boot files"]
+    root --> dev["/dev<br/>devices"]
+    root --> proc["/proc<br/>process info"]
+    root --> rt["/root<br/>root user's home"]
+    home --> rahim["/home/rahim"]
+    var --> log["/var/log"]
+    usr --> ubin["/usr/bin"]
+    classDef r fill:#8957e5,stroke:#bc8cff,color:#fff;
+    classDef d fill:#1f6feb,stroke:#58a6ff,color:#fff;
+    classDef sub fill:#161b22,stroke:#30363d,color:#e6edf3;
+    class root r;
+    class home,etc,var,usr,bin,tmp,boot,dev,proc,rt d;
+    class rahim,log,ubin sub;
+```
 
 ## 2. Important Linux Directories
 
@@ -848,6 +916,8 @@ sudo command
 
 On Linux, additional user and group information can be found in `/etc/passwd` and `/etc/group`.
 
+<p align="right"><a href="#table-of-contents">⬆️ Back to Top</a></p>
+
 ---
 
 <br>
@@ -972,6 +1042,11 @@ mv *.jpg chobi/       # moves all .jpg files into chobi/
 
 The `-p` option means **parents**. It creates missing parent directories automatically.
 
+<p align="center">
+  <img src="./assets/mkdir-p.svg" alt="mkdir -p creating nested directories step by step" width="680">
+  <br><sub><i>🎬 Animated: parents are created one level at a time</i></sub>
+</p>
+
 **Without `-p`**, this fails if `animals` and `cats` do not exist:
 
 ```bash
@@ -1008,6 +1083,8 @@ Another important behaviour: if the directory already exists, `mkdir -p animals`
 
 > [!TIP]
 > Use `mkdir -p` whenever you want to create nested directories in one command or safely ensure a directory exists.
+
+<p align="right"><a href="#table-of-contents">⬆️ Back to Top</a></p>
 
 ---
 
@@ -1240,6 +1317,18 @@ locate diary.txt
 | Find program-related files | `whereis` |
 | Quickly search using a filename index | `locate` |
 
+```mermaid
+flowchart TD
+    Q{"🔎 What are you looking for?"}
+    Q -->|"A file or folder by name"| F["find"]
+    Q -->|"Text inside files"| G["grep"]
+    Q -->|"Which executable will run"| W["which"]
+    Q -->|"Binary and manual locations"| WH["whereis"]
+    Q -->|"Fast name search, index is fine"| L["locate"]
+    classDef cmd fill:#238636,stroke:#3fb950,color:#fff;
+    class F,G,W,WH,L cmd;
+```
+
 ### 🧩 Easy Memory Technique
 
 ```text
@@ -1249,6 +1338,8 @@ Command location      → which
 Program-related files → whereis
 Indexed file search   → locate
 ```
+
+<p align="right"><a href="#table-of-contents">⬆️ Back to Top</a></p>
 
 ---
 
@@ -1342,6 +1433,8 @@ Now complete the following tasks:
 | 4 | Search for `janmodin` | `grep -rn "janmodin" golokdhadha` |
 | 5 | Find the location of `grep` | `which grep` |
 
+<p align="right"><a href="#table-of-contents">⬆️ Back to Top</a></p>
+
 ---
 
 <br>
@@ -1405,6 +1498,8 @@ A quick reference for all the important commands covered in Chapters 1–6.
 | `whereis` | Find program-related files | `whereis ls` |
 | `locate` | Search indexed filenames | `locate file.txt` |
 
+<p align="right"><a href="#table-of-contents">⬆️ Back to Top</a></p>
+
 ---
 
 <br>
@@ -1462,6 +1557,8 @@ A quick reference for all the important commands covered in Chapters 1–6.
 
 </details>
 
+<p align="right"><a href="#table-of-contents">⬆️ Back to Top</a></p>
+
 ---
 
 <br>
@@ -1480,7 +1577,9 @@ Chapters 1–6 complete   [█████████████████�
 | 04 | Exploring the Linux Filesystem | ✅ Completed |
 | 05 | Managing Files and Directories | ✅ Completed |
 | 06 | Finding Lost Files | ✅ Completed |
-| 07 | Installing Software with Package Managers | ⏳ Upcoming |
+| 07 | Installing Software with Package Managers | ➡️ [Available in Part 2](./book_study_linu_part2.md#-chapter-07--package-management-with-apt) |
+| 08 | Reading & Editing Files | ➡️ [Available in Part 2](./book_study_linu_part2.md#-chapter-08--reading-and-editing-files) |
+| 09 | Pipes & Redirection | ➡️ [Available in Part 2](./book_study_linu_part2.md#-chapter-09--pipes-and-redirection) |
 
 ---
 
