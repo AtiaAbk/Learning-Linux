@@ -1,5 +1,9 @@
 <p align="center">
-  <img src="assets/hero.svg" alt="Linux Filesystem Architecture — Complete Study &amp; Interview Guide" width="100%">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/hero-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="assets/hero-light.svg">
+    <img src="assets/hero-dark.svg" alt="Linux File System & Architecture Deep Dive" width="100%">
+  </picture>
 </p>
 
 <p align="center">

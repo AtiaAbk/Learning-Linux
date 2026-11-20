@@ -1,6 +1,39 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 28" width="1000" height="28" font-family="Segoe UI, Helvetica, Arial, sans-serif" role="img" aria-label="Section divider" xmlns:c2pa="http://c2pa.org/manifest">
 <title>Section divider</title>
-<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#58a6ff" stop-opacity="0"/><stop offset="0.35" stop-color="#58a6ff"/><stop offset="0.65" stop-color="#3fb950"/><stop offset="1" stop-color="#3fb950" stop-opacity="0"/></linearGradient></defs>
+<defs>
+  <style>
+    @media (prefers-color-scheme: light) {
+      /* Backgrounds & Cards */
+      rect[fill="url(#bg)"], rect[fill="#0b0f1a"], rect[fill="#0d1117"], rect[fill="#0a0d14"], rect[fill="#0e1320"], rect[fill="#121826"] {
+        fill: #f6f8fa !important;
+      }
+      linearGradient#bg stop:nth-child(1) { stop-color: #ffffff !important; }
+      linearGradient#bg stop:nth-child(2) { stop-color: #f6f8fa !important; }
+      linearGradient#bg stop:nth-child(3) { stop-color: #edf2f7 !important; }
+
+      rect[fill="#161b22"], rect[fill="#151b28"], rect[fill="#1a2030"] {
+        fill: #ffffff !important;
+        stroke: #d0d7de !important;
+      }
+      rect[fill="#0d1117"], rect[fill="#101522"] { fill: #f6f8fa !important; }
+      rect[stroke="#30363d"], line[stroke="#30363d"] { stroke: #d0d7de !important; }
+      rect[stroke="#21262d"], line[stroke="#21262d"] { stroke: #d0d7de !important; }
+
+      /* Typography */
+      text[fill="#ffffff"], text[fill="#e6edf3"], text[fill="#f0f6fc"], text[fill="#f8fafc"] {
+        fill: #1f2328 !important;
+      }
+      text[fill="#8b949e"], text[fill="#c9d1d9"], text[fill="#94a3b8"] {
+        fill: #57606a !important;
+      }
+      text[fill="#7d8590"] { fill: #656d76 !important; }
+
+      /* Shapes & Patterns */
+      pattern circle { fill: #0969da !important; opacity: 0.07 !important; }
+      circle[fill="#0d1117"], circle[fill="#161b22"], circle[fill="#0b0f1a"] { fill: #ffffff !important; }
+    }
+  </style>
+<linearGradient id="g" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#58a6ff" stop-opacity="0"/><stop offset="0.35" stop-color="#58a6ff"/><stop offset="0.65" stop-color="#3fb950"/><stop offset="1" stop-color="#3fb950" stop-opacity="0"/></linearGradient></defs>
 <rect x="40" y="13" width="920" height="2" rx="1" fill="url(#g)"/>
 <rect x="495" y="9" width="10" height="10" fill="#39c5cf" transform="rotate(45 500 14)"/>
 <circle r="9" fill="#58a6ff" opacity="0.25"><animateMotion dur="5s" repeatCount="indefinite" path="M60,14 L940,14"/></circle>
