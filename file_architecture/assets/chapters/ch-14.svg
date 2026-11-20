@@ -1,37 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 70" width="900" height="70" role="img" aria-label="Chapter 14: Processes &amp; Services"><title>Chapter 14: Processes &amp; Services</title><defs>
-  <style>
-    @media (prefers-color-scheme: light) {
-      /* Backgrounds & Cards */
-      rect[fill="url(#bg)"], rect[fill="#0b0f1a"], rect[fill="#0d1117"], rect[fill="#0a0d14"], rect[fill="#0e1320"], rect[fill="#121826"] {
-        fill: #f6f8fa !important;
-      }
-      linearGradient#bg stop:nth-child(1) { stop-color: #ffffff !important; }
-      linearGradient#bg stop:nth-child(2) { stop-color: #f6f8fa !important; }
-      linearGradient#bg stop:nth-child(3) { stop-color: #edf2f7 !important; }
-
-      rect[fill="#161b22"], rect[fill="#151b28"], rect[fill="#1a2030"] {
-        fill: #ffffff !important;
-        stroke: #d0d7de !important;
-      }
-      rect[fill="#0d1117"], rect[fill="#101522"] { fill: #f6f8fa !important; }
-      rect[stroke="#30363d"], line[stroke="#30363d"] { stroke: #d0d7de !important; }
-      rect[stroke="#21262d"], line[stroke="#21262d"] { stroke: #d0d7de !important; }
-
-      /* Typography */
-      text[fill="#ffffff"], text[fill="#e6edf3"], text[fill="#f0f6fc"], text[fill="#f8fafc"] {
-        fill: #1f2328 !important;
-      }
-      text[fill="#8b949e"], text[fill="#c9d1d9"], text[fill="#94a3b8"] {
-        fill: #57606a !important;
-      }
-      text[fill="#7d8590"] { fill: #656d76 !important; }
-
-      /* Shapes & Patterns */
-      pattern circle { fill: #0969da !important; opacity: 0.07 !important; }
-      circle[fill="#0d1117"], circle[fill="#161b22"], circle[fill="#0b0f1a"] { fill: #ffffff !important; }
-    }
-  </style>
-<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0b1020"/><stop offset="1" stop-color="#171d42"/></linearGradient><filter id="glow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter><pattern id="dots" width="26" height="26" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#ffffff" fill-opacity=".05"/></pattern><clipPath id="clip"><rect width="900" height="70" rx="20"/></clipPath><marker id="arr-cyan" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" refX="9" refY="6" orient="auto"><path d="M1,1 L11,6 L1,11 z" fill="#22d3ee"/></marker><marker id="arr-blue" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" refX="9" refY="6" orient="auto"><path d="M1,1 L11,6 L1,11 z" fill="#60a5fa"/></marker><marker id="arr-violet" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" refX="9" refY="6" orient="auto"><path d="M1,1 L11,6 L1,11 z" fill="#a78bfa"/></marker><marker id="arr-pink" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" refX="9" refY="6" orient="auto"><path d="M1,1 L11,6 L1,11 z" fill="#f472b6"/></marker><marker id="arr-orange" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" refX="9" refY="6" orient="auto"><path d="M1,1 L11,6 L1,11 z" fill="#fb923c"/></marker><marker id="arr-yellow" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" refX="9" refY="6" orient="auto"><path d="M1,1 L11,6 L1,11 z" fill="#facc15"/></marker><marker id="arr-green" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" refX="9" refY="6" orient="auto"><path d="M1,1 L11,6 L1,11 z" fill="#4ade80"/></marker><marker id="arr-red" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" refX="9" refY="6" orient="auto"><path d="M1,1 L11,6 L1,11 z" fill="#f87171"/></marker><marker id="arr-teal" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" refX="9" refY="6" orient="auto"><path d="M1,1 L11,6 L1,11 z" fill="#2dd4bf"/></marker><marker id="arr-slate" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" refX="9" refY="6" orient="auto"><path d="M1,1 L11,6 L1,11 z" fill="#94a3b8"/></marker></defs><style>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 70" width="900" height="70" role="img" aria-label="Chapter 14: Processes &amp; Services"><title>Chapter 14: Processes &amp; Services</title><defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0b1020"/><stop offset="1" stop-color="#171d42"/></linearGradient><filter id="glow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter><pattern id="dots" width="26" height="26" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#ffffff" fill-opacity=".05"/></pattern><clipPath id="clip"><rect width="900" height="70" rx="20"/></clipPath><marker id="arr-cyan" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" refX="9" refY="6" orient="auto"><path d="M1,1 L11,6 L1,11 z" fill="#22d3ee"/></marker><marker id="arr-blue" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" refX="9" refY="6" orient="auto"><path d="M1,1 L11,6 L1,11 z" fill="#60a5fa"/></marker><marker id="arr-violet" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" refX="9" refY="6" orient="auto"><path d="M1,1 L11,6 L1,11 z" fill="#a78bfa"/></marker><marker id="arr-pink" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" refX="9" refY="6" orient="auto"><path d="M1,1 L11,6 L1,11 z" fill="#f472b6"/></marker><marker id="arr-orange" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" refX="9" refY="6" orient="auto"><path d="M1,1 L11,6 L1,11 z" fill="#fb923c"/></marker><marker id="arr-yellow" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" refX="9" refY="6" orient="auto"><path d="M1,1 L11,6 L1,11 z" fill="#facc15"/></marker><marker id="arr-green" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" refX="9" refY="6" orient="auto"><path d="M1,1 L11,6 L1,11 z" fill="#4ade80"/></marker><marker id="arr-red" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" refX="9" refY="6" orient="auto"><path d="M1,1 L11,6 L1,11 z" fill="#f87171"/></marker><marker id="arr-teal" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" refX="9" refY="6" orient="auto"><path d="M1,1 L11,6 L1,11 z" fill="#2dd4bf"/></marker><marker id="arr-slate" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" refX="9" refY="6" orient="auto"><path d="M1,1 L11,6 L1,11 z" fill="#94a3b8"/></marker></defs><style>
 text{font-family:'Segoe UI',Ubuntu,'Helvetica Neue',Arial,sans-serif}
 .m{font-family:'SFMono-Regular',Consolas,'Liberation Mono',Menlo,'DejaVu Sans Mono',monospace}
 .flow{stroke-dasharray:7 6;animation:dash 1.2s linear infinite}

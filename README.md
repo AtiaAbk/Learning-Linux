@@ -1,9 +1,5 @@
 <p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./images/hero-banner-dark.svg">
-    <source media="(prefers-color-scheme: light)" srcset="./images/hero-banner-light.svg">
-    <img src="./images/hero-banner-dark.svg" alt="Linux Terminal Mastery" width="100%">
-  </picture>
+  <img src="./images/hero-banner.svg" alt="Linux Terminal Mastery: one repository, four distributions, one command line" width="100%">
 </p>
 
 <div align="center">
@@ -58,13 +54,7 @@
 
 --->
 
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./images/divider-dark.svg">
-    <source media="(prefers-color-scheme: light)" srcset="./images/divider-light.svg">
-    <img src="./images/divider-dark.svg" alt="" width="100%">
-  </picture>
-</p>
+<p align="center"><img src="./images/divider.svg" alt="" width="100%"></p>
 
 ## 🎯 Why This Repository Exists
 
@@ -77,13 +67,7 @@ Most Linux tutorials teach *one* distribution and leave you stuck when you meet 
 
 The terminal (navigation, permissions, processes, networking, scripting) is **90% identical** across all of them. This repository teaches that shared core once, then documents the small but important differences (package managers, default tools, philosophy) per distribution.
 
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./images/divider-dark.svg">
-    <source media="(prefers-color-scheme: light)" srcset="./images/divider-light.svg">
-    <img src="./images/divider-dark.svg" alt="" width="100%">
-  </picture>
-</p>
+<p align="center"><img src="./images/divider.svg" alt="" width="100%"></p>
 
 ## 🧠 What Is an Operating System?
 
@@ -130,13 +114,7 @@ strace -e trace=openat cat /etc/hostname 2>&1 | tail -3
 > [!NOTE]
 > `uname -a` works on Linux and macOS. `/etc/os-release` and `hostnamectl` are Linux specific.
 
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./images/divider-dark.svg">
-    <source media="(prefers-color-scheme: light)" srcset="./images/divider-light.svg">
-    <img src="./images/divider-dark.svg" alt="" width="100%">
-  </picture>
-</p>
+<p align="center"><img src="./images/divider.svg" alt="" width="100%"></p>
 
 ## 📜 A Short History of Unix and Linux
 
@@ -171,13 +149,7 @@ strace -e trace=openat cat /etc/hostname 2>&1 | tail -3
 
 Linux uses the **GNU General Public License (GPLv2)**. In practice that gives you four freedoms: **run** the software, **study** how it works, **share** copies, and **modify** it. You can read the code that runs your machine.
 
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./images/divider-dark.svg">
-    <source media="(prefers-color-scheme: light)" srcset="./images/divider-light.svg">
-    <img src="./images/divider-dark.svg" alt="" width="100%">
-  </picture>
-</p>
+<p align="center"><img src="./images/divider.svg" alt="" width="100%"></p>
 
 ## ⚔️ Linux vs Windows vs macOS
 
@@ -214,13 +186,7 @@ The same idea lives in a different place on each system.
 > [!TIP]
 > **Already on Windows?** WSL2 runs a real Linux environment inside Windows (`wsl --install`). **On a Mac?** macOS is UNIX-certified, so most commands in this repo work in Terminal, but use an Ubuntu VM for Linux-only tools like `apt`, `systemctl`, and `ufw`.
 
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./images/divider-dark.svg">
-    <source media="(prefers-color-scheme: light)" srcset="./images/divider-light.svg">
-    <img src="./images/divider-dark.svg" alt="" width="100%">
-  </picture>
-</p>
+<p align="center"><img src="./images/divider.svg" alt="" width="100%"></p>
 
 ## 🐚 Terminals and Shells Compared
 
@@ -295,13 +261,7 @@ Get-Process | Where-Object { $_.Name -eq "nginx" } | Select-Object Name, CPU
   <img src="./images/terminal-anatomy.svg" alt="Breakdown of a shell prompt and a command into username, hostname, directory, command, option, and argument" width="100%">
 </p>
 
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./images/divider-dark.svg">
-    <source media="(prefers-color-scheme: light)" srcset="./images/divider-light.svg">
-    <img src="./images/divider-dark.svg" alt="" width="100%">
-  </picture>
-</p>
+<p align="center"><img src="./images/divider.svg" alt="" width="100%"></p>
 
 ## 🖥️ Distributions Covered
 
@@ -364,13 +324,7 @@ Linux-Terminal-Mastery/
 
 > **How to use this repo:** Start here for anything common to all four distros (permissions, navigation, scripting, networking). Go into a distro's own folder only for installation steps and that distro's unique quirks.
 
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./images/divider-dark.svg">
-    <source media="(prefers-color-scheme: light)" srcset="./images/divider-light.svg">
-    <img src="./images/divider-dark.svg" alt="" width="100%">
-  </picture>
-</p>
+<p align="center"><img src="./images/divider.svg" alt="" width="100%"></p>
 
 ## 💿 Setting Up Your Lab (VM Installation)
 
@@ -423,13 +377,7 @@ All four distributions in this repo are meant to be run as **virtual machines**:
 
 > 💡 **Tip:** Run all four VMs side by side (if your host has the RAM) so you can directly compare command output between distributions as you learn.
 
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./images/divider-dark.svg">
-    <source media="(prefers-color-scheme: light)" srcset="./images/divider-light.svg">
-    <img src="./images/divider-dark.svg" alt="" width="100%">
-  </picture>
-</p>
+<p align="center"><img src="./images/divider.svg" alt="" width="100%"></p>
 
 ## 🔍 How the Distributions Differ
 
@@ -447,13 +395,7 @@ All four distributions in this repo are meant to be run as **virtual machines**:
 > [!NOTE]
 > Fedora is **not** a rolling release. It ships fixed versions on a regular schedule, which makes it "cutting-edge" but still predictable.
 
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./images/divider-dark.svg">
-    <source media="(prefers-color-scheme: light)" srcset="./images/divider-light.svg">
-    <img src="./images/divider-dark.svg" alt="" width="100%">
-  </picture>
-</p>
+<p align="center"><img src="./images/divider.svg" alt="" width="100%"></p>
 
 ## 🔌 What Happens When Linux Boots
 
@@ -487,13 +429,7 @@ systemd-analyze                   # how long did boot take?
 > [!WARNING]
 > The SSH service is called **`ssh`** on Ubuntu and Kali, but **`sshd`** on Fedora. This kind of small naming difference is exactly what this repo helps you spot.
 
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./images/divider-dark.svg">
-    <source media="(prefers-color-scheme: light)" srcset="./images/divider-light.svg">
-    <img src="./images/divider-dark.svg" alt="" width="100%">
-  </picture>
-</p>
+<p align="center"><img src="./images/divider.svg" alt="" width="100%"></p>
 
 ## ⚡ Terminal Fundamentals (Common to All)
 
@@ -540,13 +476,7 @@ Small tools become powerful when you connect them.
 | `Ctrl + A` / `Ctrl + E` | Jump to start / end of the line |
 | `!!` | Repeat the last command (`sudo !!` adds sudo) |
 
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./images/divider-dark.svg">
-    <source media="(prefers-color-scheme: light)" srcset="./images/divider-light.svg">
-    <img src="./images/divider-dark.svg" alt="" width="100%">
-  </picture>
-</p>
+<p align="center"><img src="./images/divider.svg" alt="" width="100%"></p>
 
 ## 📦 Package Managers — One Concept, Four Syntaxes
 
@@ -576,13 +506,7 @@ Same task, different command. This is usually the *only* thing that changes betw
 
 Full guide: [`common/package-managers.md`](common/package-managers.md)
 
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./images/divider-dark.svg">
-    <source media="(prefers-color-scheme: light)" srcset="./images/divider-light.svg">
-    <img src="./images/divider-dark.svg" alt="" width="100%">
-  </picture>
-</p>
+<p align="center"><img src="./images/divider.svg" alt="" width="100%"></p>
 
 ## 📋 Core Command Reference
 
@@ -616,13 +540,7 @@ ip a                          # show interfaces
 ssh user@host                  # remote login
 ```
 
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./images/divider-dark.svg">
-    <source media="(prefers-color-scheme: light)" srcset="./images/divider-light.svg">
-    <img src="./images/divider-dark.svg" alt="" width="100%">
-  </picture>
-</p>
+<p align="center"><img src="./images/divider.svg" alt="" width="100%"></p>
 
 ## 🔐 Permissions, Users & Services
 
@@ -662,13 +580,7 @@ sudo usermod -aG wheel bob      # Fedora: the admin group is "wheel"
 | Check status | `sudo ufw status` | `sudo firewall-cmd --list-all` |
 | Mandatory access control | AppArmor (`sudo aa-status`) | SELinux (`getenforce`) |
 
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./images/divider-dark.svg">
-    <source media="(prefers-color-scheme: light)" srcset="./images/divider-light.svg">
-    <img src="./images/divider-dark.svg" alt="" width="100%">
-  </picture>
-</p>
+<p align="center"><img src="./images/divider.svg" alt="" width="100%"></p>
 
 ## 🌐 Networking Basics
 
@@ -694,13 +606,7 @@ Covered in depth, distro-agnostic, in [`common/networking.md`](common/networking
 | 80 | HTTP |
 | 443 | HTTPS |
 
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./images/divider-dark.svg">
-    <source media="(prefers-color-scheme: light)" srcset="./images/divider-light.svg">
-    <img src="./images/divider-dark.svg" alt="" width="100%">
-  </picture>
-</p>
+<p align="center"><img src="./images/divider.svg" alt="" width="100%"></p>
 
 ## 🗂️ Distro-Specific Guides
 
@@ -753,13 +659,7 @@ See [`common/cheatsheets/universal-commands.md`](common/cheatsheets/universal-co
 | **Snapshot** | A saved checkpoint of a VM you can roll back to |
 | **ISO** | A disk image used to install an operating system |
 
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./images/divider-dark.svg">
-    <source media="(prefers-color-scheme: light)" srcset="./images/divider-light.svg">
-    <img src="./images/divider-dark.svg" alt="" width="100%">
-  </picture>
-</p>
+<p align="center"><img src="./images/divider.svg" alt="" width="100%"></p>
 
 ## ✍️ About the Author
 

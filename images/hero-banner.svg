@@ -1,39 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 340" width="1000" height="340" font-family="Segoe UI, Helvetica, Arial, sans-serif" role="img" aria-label="Linux Terminal Mastery banner" xmlns:c2pa="http://c2pa.org/manifest">
 <title>Linux Terminal Mastery banner</title>
-<defs>
-  <style>
-    @media (prefers-color-scheme: light) {
-      /* Backgrounds & Cards */
-      rect[fill="url(#bg)"], rect[fill="#0b0f1a"], rect[fill="#0d1117"], rect[fill="#0a0d14"], rect[fill="#0e1320"], rect[fill="#121826"] {
-        fill: #f6f8fa !important;
-      }
-      linearGradient#bg stop:nth-child(1) { stop-color: #ffffff !important; }
-      linearGradient#bg stop:nth-child(2) { stop-color: #f6f8fa !important; }
-      linearGradient#bg stop:nth-child(3) { stop-color: #edf2f7 !important; }
-
-      rect[fill="#161b22"], rect[fill="#151b28"], rect[fill="#1a2030"] {
-        fill: #ffffff !important;
-        stroke: #d0d7de !important;
-      }
-      rect[fill="#0d1117"], rect[fill="#101522"] { fill: #f6f8fa !important; }
-      rect[stroke="#30363d"], line[stroke="#30363d"] { stroke: #d0d7de !important; }
-      rect[stroke="#21262d"], line[stroke="#21262d"] { stroke: #d0d7de !important; }
-
-      /* Typography */
-      text[fill="#ffffff"], text[fill="#e6edf3"], text[fill="#f0f6fc"], text[fill="#f8fafc"] {
-        fill: #1f2328 !important;
-      }
-      text[fill="#8b949e"], text[fill="#c9d1d9"], text[fill="#94a3b8"] {
-        fill: #57606a !important;
-      }
-      text[fill="#7d8590"] { fill: #656d76 !important; }
-
-      /* Shapes & Patterns */
-      pattern circle { fill: #0969da !important; opacity: 0.07 !important; }
-      circle[fill="#0d1117"], circle[fill="#161b22"], circle[fill="#0b0f1a"] { fill: #ffffff !important; }
-    }
-  </style>
-<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0b0f1a"/><stop offset="1" stop-color="#1a1b3a"/></linearGradient><linearGradient id="tg" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#58a6ff"/><stop offset="0.55" stop-color="#39c5cf"/><stop offset="1" stop-color="#3fb950"/></linearGradient><clipPath id="round"><rect width="1000" height="340" rx="20"/></clipPath><clipPath id="c0"><rect x="228" y="192" width="520" height="28"><animate attributeName="width" values="0;0;520;520;0" keyTimes="0;0.0571;0.1857;0.93;1" dur="14.0s" repeatCount="indefinite"/></rect></clipPath><clipPath id="c1"><rect x="228" y="220" width="520" height="28"><animate attributeName="width" values="0;0;520;520;0" keyTimes="0;0.2286;0.3714;0.93;1" dur="14.0s" repeatCount="indefinite"/></rect></clipPath><clipPath id="c2"><rect x="228" y="248" width="520" height="28"><animate attributeName="width" values="0;0;520;520;0" keyTimes="0;0.4143;0.5571;0.93;1" dur="14.0s" repeatCount="indefinite"/></rect></clipPath></defs>
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0b0f1a"/><stop offset="1" stop-color="#1a1b3a"/></linearGradient><linearGradient id="tg" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#58a6ff"/><stop offset="0.55" stop-color="#39c5cf"/><stop offset="1" stop-color="#3fb950"/></linearGradient><clipPath id="round"><rect width="1000" height="340" rx="20"/></clipPath><clipPath id="c0"><rect x="228" y="192" width="520" height="28"><animate attributeName="width" values="0;0;520;520;0" keyTimes="0;0.0571;0.1857;0.93;1" dur="14.0s" repeatCount="indefinite"/></rect></clipPath><clipPath id="c1"><rect x="228" y="220" width="520" height="28"><animate attributeName="width" values="0;0;520;520;0" keyTimes="0;0.2286;0.3714;0.93;1" dur="14.0s" repeatCount="indefinite"/></rect></clipPath><clipPath id="c2"><rect x="228" y="248" width="520" height="28"><animate attributeName="width" values="0;0;520;520;0" keyTimes="0;0.4143;0.5571;0.93;1" dur="14.0s" repeatCount="indefinite"/></rect></clipPath></defs>
 <rect width="1000" height="340" rx="20" fill="url(#bg)"/>
 <g clip-path="url(#round)">
 <text x="14" y="-30" font-family="SFMono-Regular, Consolas, Menlo, monospace" font-size="14" fill="#3fb950" opacity="0.16"><tspan x="14" dy="17">d</tspan><tspan x="14" dy="17">a</tspan><tspan x="14" dy="17">e</tspan><tspan x="14" dy="17">/</tspan><tspan x="14" dy="17">0</tspan><tspan x="14" dy="17">1</tspan><tspan x="14" dy="17">$</tspan><tspan x="14" dy="17">1</tspan><tspan x="14" dy="17">d</tspan><tspan x="14" dy="17">#</tspan><tspan x="14" dy="17">0</tspan><tspan x="14" dy="17">$</tspan><tspan x="14" dy="17">b</tspan><tspan x="14" dy="17">0</tspan><tspan x="14" dy="17">1</tspan><tspan x="14" dy="17">e</tspan><tspan x="14" dy="17">e</tspan><tspan x="14" dy="17">1</tspan><tspan x="14" dy="17">b</tspan><tspan x="14" dy="17">1</tspan><tspan x="14" dy="17">$</tspan><tspan x="14" dy="17">e</tspan><tspan x="14" dy="17">0</tspan><tspan x="14" dy="17">#</tspan><animateTransform attributeName="transform" type="translate" values="0,-40;0,40" dur="7s" repeatCount="indefinite"/></text>
