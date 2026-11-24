@@ -14,7 +14,7 @@
 
 </div>
 
-> A single, structured learning path for the Linux terminal, built once and applied across every major distribution family. Install each OS in a VM, then build the exact same command-line skills whether you're on a Debian-based desktop, a headless server, a penetration-testing distro, or a Red Hat–based system.
+
 
 **Author:** [Atia Sanjida](https://www.linkedin.com/in/atia-sanjida-085947233/) · **Contact:** [atia.abk@gmail.com](mailto:atia.abk@gmail.com)
 
